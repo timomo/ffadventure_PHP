@@ -77,7 +77,7 @@ $chara_file  = "./chara.cgi";
  * 
  * @var string
  */
-$recode_file= './recode.cgi';
+$recode_file= './data/recode.ini';
 
 /**
  * 勝利者データ
@@ -98,7 +98,7 @@ $message_file = "./message.cgi";
  * 
  * @var string
  */
-$syoku_file= "./syoku.ini";
+$syoku_file= "./data/syoku.ini";
 
 /**
  * モンスターデータファイル
@@ -107,14 +107,14 @@ $syoku_file= "./syoku.ini";
  * 
  * @var string
  */
-$monster_file= "./monster.ini";
+$monster_file= "./data/monster.ini";
 
 /**
  * アイテムデータファイル
  * 
  * @var string
  */
-$item_file = "./item.ini";
+$item_file = "./data/item.ini";
 
 /**
  * 各職業に必要なパラメータ説明ページ

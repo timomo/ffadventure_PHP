@@ -6,15 +6,34 @@
  * Time: 18:20
  */
 
+/**
+ * @return void
+ */
 function html_top() {
     $c_id = 'test1';
     $c_pass = 'test2';
+    $script = read_config_option( 'script' );
+    $homepage = read_config_option( 'homepage' );
+    $title_img = read_config_option( 'title_img' );
+    $home_title = read_config_option( 'home_title' );
+    $kanri_message = read_config_option( 'kanri_message' );
+    $syoku_html = read_config_option( 'syoku_html' );
+    $record = read_file( read_config_option( 'recode_file' ) );
+    $img_path = read_config_option( 'img_path' );
+    $chara_img = read_config_option( 'chara_img' );
+    $wchara = 0;
+    
+    if ( isset( $record[0] ) ) {
+        list( $rcount, $rname, $rsite, $rurl ) = @explode( '<>', $record[0] );
+    } else {
+        list( $rcount, $rname, $rsite, $rurl ) = array( null, null, null, null );
+    }
     ?>
-<form action="<?= read_config_option( 'script') ?>" method="POST">
+<form action="<?= $script ?>" method="POST">
 <input type="hidden" name="mode" value="log_in">
 <table border=0 width='100%'>
 <tr>
-<td><img src="<?= read_config_option( 'title_img' ) ?>"></td>
+<td><img src="<?= $title_img ?>"></td>
 <td align="right" valign="top">
 	<table border=1>
 	<tr>
@@ -33,30 +52,30 @@ function html_top() {
 </table>
 <hr size=0>
 <small>
-/ <a href="$homepage">$home_title</a> / <a href="$script?mode=item_shop">武器屋</a> / <a href="$script?mode=ranking">英雄たちの記録</a> / <a href="$syoku_html">各職業に必要な特性値</a> / <a href="http://cgi.members.interq.or.jp/sun/cumro/cgi-bin/idea/wwwlng.cgi">アイデア募集</a> /
+/ <a href="<?= $homepage ?>"><?= $home_title ?></a> / <a href="<?= $script ?>?mode=item_shop">武器屋</a> / <a href="<?= $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?= $syoku_html ?>">各職業に必要な特性値</a> / <a href="http://cgi.members.interq.or.jp/sun/cumro/cgi-bin/idea/wwwlng.cgi">アイデア募集</a> /
 </form>
-    $kanri_message
+    <?= $kanri_message ?>
 <p>
-    現在の連勝記録は、$rnameさんの「<A HREF=\"http\:\/\/$rurl\" TARGET=\"_blank\"><FONT SIZE=\"3\" COLOR=\"#6666BB\">$rsite</FONT></A>」、$rcount連勝です。新記録を出したサイト名の横には、<IMG SRC="$mark">マークがつきます。
+    現在の連勝記録は、<?= $rname ?>さんの「<a href="<?= $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 3"><?= $rsite ?></span></a>」、<?= $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="$mark" />マークがつきます。
 <table border=0 width='100%'>
 <tr>
 <td width="500" valign="top">
 	<table border=1 width="100%">
 	<tr>
-	<td colspan=5 align="center" class="b2"><font color="#FFFFFF">$wcount連勝中</font></td>
+	<td colspan=5 align="center" class="b2"><span color="#FFFFFF">$wcount連勝中</span></td>
     </tr>
 	<tr>
 	<td align="center" class="b1">ホームページ</td>
-	<td colspan="4"><a href="http\:\/\/$wurl"><b>$wsite</b></a>
+	<td colspan="4"><a href="http://$wurl"><b>$wsite</b></a>
     EOM
 	if($rurl eq "$wurl") {
-        print "<IMG SRC=\"$mark\" border=0>\n";
+        print "<IMG SRC="$mark" border=0>\n";
     }
 	print <<"EOM";
 	</td>
 	</tr>
 	<tr>
-	<td align="center" rowspan="8"><img src="$img_path/$chara_img[$wchara]"><p>勝率：$ritu\%<br>武器：$wi_name</td>
+	<td align="center" rowspan="8"><img src="<?= $img_path ?>/<?= $chara_img[ $wchara ] ?>"><p>勝率：$ritu\%<br>武器：$wi_name</td>
 	<td align="center" class="b1">なまえ</td><td><b>$wname</b></td>
 	<td align="center" class="b1">性別</td><td><b>$esex</b></td>
 	</tr>
@@ -94,7 +113,7 @@ function html_top() {
 	</table>
 </td>
 <td valign="top" class=small>
-[<B><FONT COLOR="#FF9933">$main_title の遊び方</FONT></B>]
+[<B><span style="color: #FF9933;"><?= $main_title ?> の遊び方</span></B>]
     <OL>
 <LI>まず、「新規キャラクター登録」ボタンを押して、キャラクターを作成します。
 <LI>キャラクターの作成が完了したら、このページの右上にあるところからログインして、あなた専用のステータス画面に入ります。
@@ -105,9 +124,9 @@ function html_top() {
 <LI><b>$limit日</b>以上闘わなければ、キャラクターのデータが削除されます。
 <LI>一度戦闘すると<b>$b_time</b>秒経過しないと再び戦闘できません。
 </OL>
-    [<B><FONT COLOR="#FF9933">新規キャラクタ作成</FONT></B>]<BR>
+    [<B><span style="color: #FF9933;">新規キャラクタ作成</span></B>]<BR>
     下のボタンを押して、あなたのキャラクターを作成します。
-<FORM ACTION="$script" METHOD="POST">
+<FORM ACTION="<?= $script ?>" METHOD="POST">
 <INPUT TYPE="hidden" NAME="mode" VALUE="chara_make">
 <INPUT TYPE="submit" VALUE="新規キャラクター作成">
 </FORM>

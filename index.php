@@ -8,5 +8,6 @@
 
 require_once 'lib/functions.php';
 require_once 'include/global.php';
+require_once 'lib/login.php';
 
 forward( "" );

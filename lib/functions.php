@@ -7,7 +7,7 @@
  */
 
 /**
- * @param $config_name
+ * @param string $config_name
  * @return mixed
  */
 function read_config_option( $config_name ) {
@@ -19,7 +19,7 @@ function read_config_option( $config_name ) {
 }
 
 /**
- * @param integer $time
+ * @param int $time
  * @return string
  */
 function get_time( $time = null ) {
@@ -54,9 +54,9 @@ function forward( $tmp ) {
         set_command_map();
     }
     
-    $mode = $tmp['mode'];
+    $mode = '';
     $func = $GLOBALS['FFADV_COMMAND_MAP'][ $mode ];
-    
+
     if ( function_exists( $func ) ) {
         call_user_func( $func, $tmp );
     } else {
@@ -85,4 +85,16 @@ function set_command_map() {
         'item_shop' => 'item_shop',
         'item_buy' => 'item_buy'
     );
+}
+
+/**
+ * @param string $path
+ * @return array
+ */
+function read_file( $path ) {
+    if ( file_exists( $path ) == false ) {
+        return array();
+    }
+    $contents = file( $path, FILE_USE_INCLUDE_PATH | FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+    return $contents;
 }
