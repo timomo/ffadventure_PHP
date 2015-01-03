@@ -30,11 +30,11 @@ function html_top() {
         list( $rcount, $rname, $rsite, $rurl ) = array( null, null, null, null );
     }
     ?>
-<form action="<?= $script ?>" method="POST">
+<form action="<?php echo $script ?>" method="POST">
 <input type="hidden" name="mode" value="log_in">
 <table border=0 width='100%'>
 <tr>
-<td><img src="<?= $title_img ?>"></td>
+<td><img src="<?php echo $title_img ?>"></td>
 <td align="right" valign="top">
 	<table border=1>
 	<tr>
@@ -42,9 +42,9 @@ function html_top() {
 	</tr>
 	<tr>
 	<td class=b1>I D</td>
-	<td><input type="text" size="10" name="id" value="<?= $c_id ?>"></td>
+	<td><input type="text" size="10" name="id" value="<?php echo $c_id ?>"></td>
 	<td class=b1>パスワード</td>
-	<td><input type="password" size="10" name="pass" value="<?= $c_pass ?>"></td>
+	<td><input type="password" size="10" name="pass" value="<?php echo $c_pass ?>"></td>
 	<td><input type="submit" value="ログイン"></td>
 	</tr>
 	</table>
@@ -53,11 +53,11 @@ function html_top() {
 </table>
 <hr size=0>
 <small>
-/ <a href="<?= $homepage ?>"><?= $home_title ?></a> / <a href="<?= $script ?>?mode=item_shop">武器屋</a> / <a href="<?= $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?= $syoku_html ?>">各職業に必要な特性値</a> / <a href="http://cgi.members.interq.or.jp/sun/cumro/cgi-bin/idea/wwwlng.cgi">アイデア募集</a> /
+/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=item_shop">武器屋</a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="http://cgi.members.interq.or.jp/sun/cumro/cgi-bin/idea/wwwlng.cgi">アイデア募集</a> /
 </form>
-    <?= $kanri_message ?>
+    <?php echo $kanri_message ?>
 <p>
-    現在の連勝記録は、<?= $rname ?>さんの「<a href="<?= $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 3"><?= $rsite ?></span></a>」、<?= $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="<?php echo $img_path ?>/<?php echo $mark ?>" />マークがつきます。
+    現在の連勝記録は、<?php echo $rname ?>さんの「<a href="<?php echo $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 3"><?php echo $rsite ?></span></a>」、<?php echo $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="<?php echo $img_path ?>/<?php echo $mark ?>" />マークがつきます。
 <table border=0 width='100%'>
 <tr>
 <td width="500" valign="top">
@@ -76,7 +76,7 @@ function html_top() {
 	</td>
 	</tr>
 	<tr>
-	<td align="center" rowspan="8"><img src="<?= $img_path ?>/<?= $chara_img[ $wchara ] ?>"><p>勝率：$ritu\%<br>武器：$wi_name</td>
+	<td align="center" rowspan="8"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $wchara ] ?>"><p>勝率：$ritu\%<br>武器：$wi_name</td>
 	<td align="center" class="b1">なまえ</td><td><b>$wname</b></td>
 	<td align="center" class="b1">性別</td><td><b>$esex</b></td>
 	</tr>
@@ -114,7 +114,7 @@ function html_top() {
 	</table>
 </td>
 <td valign="top" class=small>
-[<B><span style="color: #FF9933;"><?= $main_title ?> の遊び方</span></B>]
+[<B><span style="color: #FF9933;"><?php echo $main_title ?> の遊び方</span></B>]
     <OL>
 <LI>まず、「新規キャラクター登録」ボタンを押して、キャラクターを作成します。
 <LI>キャラクターの作成が完了したら、このページの右上にあるところからログインして、あなた専用のステータス画面に入ります。
@@ -127,7 +127,7 @@ function html_top() {
 </OL>
     [<B><span style="color: #FF9933;">新規キャラクタ作成</span></B>]<BR>
     下のボタンを押して、あなたのキャラクターを作成します。
-<FORM ACTION="<?= $script ?>" METHOD="POST">
+<FORM ACTION="<?php echo $script ?>" METHOD="POST">
 <INPUT TYPE="hidden" NAME="mode" VALUE="chara_make">
 <INPUT TYPE="submit" VALUE="新規キャラクター作成">
 </FORM>
