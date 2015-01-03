@@ -22,6 +22,8 @@ function html_top() {
     $img_path = read_config_option( 'img_path' );
     $chara_img = read_config_option( 'chara_img' );
     $mark = read_config_option( 'mark' );
+    $limit = read_config_option( '$limit' );
+    $b_time = read_config_option( '$b_time' );
     $wchara = 0;
     
     if ( isset( $record[0] ) ) {
@@ -30,11 +32,11 @@ function html_top() {
         list( $rcount, $rname, $rsite, $rurl ) = array( null, null, null, null );
     }
     ?>
-<form action="<?php echo $script ?>" method="POST">
-<input type="hidden" name="mode" value="log_in">
-<table border=0 width='100%'>
+<form action="<?php echo $script ?>" method="post">
+<input type="hidden" name="mode" value="log_in" />
+<table border="0" width="100%">
 <tr>
-<td><img src="<?php echo $title_img ?>"></td>
+<td><img src="<?php echo $img_path ?>/<?php echo $title_img ?>"></td>
 <td align="right" valign="top">
 	<table border=1>
 	<tr>
@@ -53,7 +55,7 @@ function html_top() {
 </table>
 <hr size=0>
 <small>
-/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=item_shop">武器屋</a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="http://cgi.members.interq.or.jp/sun/cumro/cgi-bin/idea/wwwlng.cgi">アイデア募集</a> /
+/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=item_shop">武器屋</a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="https://github.com/timomo/ffadventure_PHP/issues">アイデア募集</a> /
 </form>
     <?php echo $kanri_message ?>
 <p>
@@ -113,23 +115,24 @@ function html_top() {
 	</tr>
 	</table>
 </td>
-<td valign="top" class=small>
+<td valign="top" class="small">
 [<B><span style="color: #FF9933;"><?php echo $main_title ?> の遊び方</span></B>]
-    <OL>
-<LI>まず、「新規キャラクター登録」ボタンを押して、キャラクターを作成します。
-<LI>キャラクターの作成が完了したら、このページの右上にあるところからログインして、あなた専用のステータス画面に入ります。
-<LI>そこであなたの行動を選択することができます。
-<LI>一度キャラクターを作成したら、右上のところからログインして遊びます。新規にキャラクターを作れるのは、一人に一つのキャラクターのみです。
-<LI>これは、HPバトラーではなく、キャラバトラーです。キャラクターを育てていくゲームです。
-<LI>能\力を振り分けることができキャラクターの能\力をご自分で決めることができます。(ここで決めた能\力はごくまれにしか上昇しないので、慎重に)
-<LI><b>$limit日</b>以上闘わなければ、キャラクターのデータが削除されます。
-<LI>一度戦闘すると<b>$b_time</b>秒経過しないと再び戦闘できません。
-</OL>
+    <ol>
+<li>まず、「新規キャラクター登録」ボタンを押して、キャラクターを作成します。
+<li>キャラクターの作成が完了したら、このページの右上にあるところからログインして、あなた専用のステータス画面に入ります。
+<li>そこであなたの行動を選択することができます。
+<li>一度キャラクターを作成したら、右上のところからログインして遊びます。新規にキャラクターを作れるのは、一人に一つのキャラクターのみです。
+<li>これは、HPバトラーではなく、キャラバトラーです。キャラクターを育てていくゲームです。
+<li>能\力を振り分けることができキャラクターの能\力をご自分で決めることができます。(ここで決めた能\力はごくまれにしか上昇しないので、慎重に)
+<lik
+><b><?php echo $limit ?>日</b>以上闘わなければ、キャラクターのデータが削除されます。
+<LI>一度戦闘すると<b><?php echo $b_time ?></b>秒経過しないと再び戦闘できません。
+</ol>
     [<B><span style="color: #FF9933;">新規キャラクタ作成</span></B>]<BR>
     下のボタンを押して、あなたのキャラクターを作成します。
-<FORM ACTION="<?php echo $script ?>" METHOD="POST">
-<INPUT TYPE="hidden" NAME="mode" VALUE="chara_make">
-<INPUT TYPE="submit" VALUE="新規キャラクター作成">
+<form action="<?php echo $script ?>" method="post">
+<input type="hidden" name="mode" value="chara_make" />
+<input type="submit" value="新規キャラクター作成" />
 </FORM>
 </td>
 </tr>
