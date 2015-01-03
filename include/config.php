@@ -56,14 +56,14 @@ $mente = 0;
  * 
  * @var string
  */
-$script = "./ffadventure.cgi";
+$script = "./index.php";
 
 /**
  * CGIスクリプトまでの絶対パス（http://から）
  * 
  * @var string
  */
-$script_url = "http://cgi.members.interq.or.jp/sun/cumro/cgi-bin/ff/ffadventure.cgi";
+$script_url = "http://ffadv.special-thanks.me/index.php";
 
 /**
  * キャラクターデータファイル
@@ -128,7 +128,7 @@ $syoku_html = "./index.html";
  * 
  * @var string
  */
-$title_img = "./title.gif";
+$title_img = "title.gif";
 
 /**
  * 連勝記録サイトの横に表示するマーク画像
@@ -179,7 +179,7 @@ $home_title = "HOMEへ";
  * 
  * @var string
  */
-$homepage = "http://cgi.members.interq.or.jp/sun/cumro/";
+$homepage = "http://ffadv.special-thanks.me/";
 
 /**
  * 管理者からのメッセージ

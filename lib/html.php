@@ -35,7 +35,8 @@ function show_footer() {
     ?>
 	<hr size=0 width="100%" />
 	<div align="right" class="small">
-	<?php echo $ver ?> by <a href="http://www.interq.or.jp/sun/cumro/">D.Takamiya(CUMRO)</a><br />
+	<?php echo $ver ?> by <a href="https://github.com/timomo/ffadventure_PHP">timomo</a><br />
+	FF Adventure v0.45 by <a href="http://www.interq.or.jp/sun/cumro/">D.Takamiya(CUMRO)</a><br />
 	Character Image by <a href="http://www.aas.mtci.ne.jp/~hiji/9ff/9ff.html">9-FFいっしょにTALK</a><br />
 	cooperation site by <a href="http://webooo.csidenet.com/asvyweb/">FFADV推奨委員会</a>
 	</div>
