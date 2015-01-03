@@ -142,7 +142,7 @@ $mark = "./pochi5.gif";
  * 
  * @var string
  */
-$img_path   ="./chara";
+$img_path   ="./images";
 
 /**
  * ファイルロック形式(KENT WEBさんのスクリプトより抜粋させて頂きました)
