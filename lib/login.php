@@ -31,6 +31,9 @@ function html_top() {
     } else {
         list( $rcount, $rname, $rsite, $rurl ) = array( null, null, null, null );
     }
+    
+    show_header();
+
     ?>
 <form action="<?php echo $script ?>" method="post">
 <input type="hidden" name="mode" value="log_in" />
@@ -140,5 +143,5 @@ function html_top() {
 </small>
     <?php
     
-    
+    show_footer();
 }
