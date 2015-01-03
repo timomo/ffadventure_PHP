@@ -147,3 +147,4 @@ function html_top() {
     <?php
     show_footer();
 }
+
