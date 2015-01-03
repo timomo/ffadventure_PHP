@@ -7,11 +7,12 @@
  */
 
 function chara_make() {
+    $script = read_config_option( 'script' );
     show_header();
     ?>
     <h1>キャラクタ作成画面</h1>
-    <hr size=0>
-    <form action="$script" method="post">
+    <hr size=0 />
+    <form action="<?php echo $script ?>" method="post">
         <input type="hidden" name="mode" value="make_end">
         <table border=1>
             <tr>
@@ -91,4 +92,9 @@ function chara_make() {
     </form>
 <?php
     show_footer();
+}
+
+function make_end() {
+    
+    
 }

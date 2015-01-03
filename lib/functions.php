@@ -42,8 +42,25 @@ function file_unlock() {
 }
 
 function error_page( $error ) {
-    
-    
+    show_header();
+    if ( is_array( $error ) ) {
+        $error = array( $error );
+    }
+    ?>
+    <hr width="400" />
+    <h3>ERROR !</h3>
+    <?php
+    foreach ( $error as $e ) {
+    ?>
+    <p><span style="color: #ff0000; font-weight: bold;"><?php echo $e ?></span></p>
+    <?php
+    }
+    ?>
+    <p><hr size="400" /></p>
+    </body>
+    </html>
+    <?php
+    exit;
 }
 
 /**
