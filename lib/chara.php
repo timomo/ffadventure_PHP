@@ -61,24 +61,29 @@ function chara_make() {
                             <td class="b2" width="70">力</td><td class="b2" width="70">知能\</td><td class="b2" width="70">信仰心</td><td class="b2" width="70">生命力</td><td class="b2" width="70">器用さ</td><td class="b2" width="70">速さ</td><td class="b2" width="70">魅力</td>
                         </tr>
                         <tr>
-                            EOM
-
-                            $point = int(rand(10));
-                            $point+=4;
-
-                            $i=0;$j=0;
-                            foreach(0..6){
-                            print "<td>$kiso_nouryoku[$i] + <select name=n_$i>\n";
-                                    foreach(0..$point){
-                                    print "<option value=\"$j\">$j\n";
-                                        $j++;
-                                        }
-                                        print "</select>\n";
-                                print "</td>\n";
-                            $i++;$j=0;
+                            <?php
+                            $point = rand( 0, 10 );
+                            $point += 4;
+                            $i=0;
+                            $j=0;
+                            foreach ( range( 0, 6 ) as $number1 ) {
+                                ?>
+                                <td><?php echo $kiso_nouryoku[$i] ?><select name="n_<?php echo $i ?>">
+                                <?php
+                                foreach( range( 0, $point ) as $number2 ) {
+                                    ?>
+                                    <option value="<?php echo $j ?>"><?php echo $j ?></option>
+                                    <?php
+                                    $j++;
+                                }
+                                ?>
+                                </select>
+                                </td>
+                                <?php
+                                $i++;
+                                $j=0;
                             }
-
-                            print <<"EOM";
+                            ?>
                         </tr>
                     </table>
                     <small>△ボーナスポイント「<b>$point</b>」をそれぞれに振り分けてください。(振り分けた合計が、$point以下になるように。<br>又どれかが最低12以上になるように。最高は18までです)</small>

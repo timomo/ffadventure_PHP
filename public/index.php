@@ -12,6 +12,4 @@ require_once '../lib/login.php';
 require_once '../lib/html.php';
 require_once '../lib/chara.php';
 
-// forward( "" );
-
-error_page( array( "test1", "test2" ) );
+forward( "" );
