@@ -56,7 +56,7 @@ function error_page( $error ) {
     <?php
     }
     ?>
-    <p><hr size="400" /></p>
+    <hr size="400" />
     </body>
     </html>
     <?php
