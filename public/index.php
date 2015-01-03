@@ -14,4 +14,4 @@ require_once '../lib/chara.php';
 
 // forward( "" );
 
-error_page( "test" );
+error_page( array( "test1", "test2" ) );
