@@ -43,7 +43,7 @@ function file_unlock() {
 
 function error_page( $error ) {
     show_header();
-    if ( is_array( $error ) ) {
+    if ( is_array( $error ) == false ) {
         $error = array( $error );
     }
     ?>
