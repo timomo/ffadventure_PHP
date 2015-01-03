@@ -67,6 +67,7 @@ function show_header() {
     $vlink = read_config_option( 'vlink' );
     $alink = read_config_option( 'alink' );
     $main_title = read_config_option( 'main_title' );
+    $b_size = read_config_option( 'b_size' );
     // TODO: $mode
     // TODO: $ktotal
     // TODO: $vtime
@@ -143,7 +144,7 @@ function show_header() {
     }
     -->
     </style>
-	<title><?php echo $main_title ?></title></head>\n";
+	<title><?php echo $main_title ?></title></head>
 	<body background="<?php echo $backgif ?>" bgcolor="<?php echo $bgcolor ?>" text="<?php echo $text ?>" link="<?php echo $link ?>" vlink="<?php echo $vlink ?>" alink="<?php echo $alink ?>">
     <?php
 }
