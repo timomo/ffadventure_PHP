@@ -135,14 +135,14 @@ $title_img = "./title.gif";
  * 
  * @var string
  */
-$mark = "./pochi5.gif";
+$mark = "pochi5.gif";
 
 /**
  * モンスターイメージデータパス
  * 
  * @var string
  */
-$img_path   ="./images";
+$img_path   ="images";
 
 /**
  * ファイルロック形式(KENT WEBさんのスクリプトより抜粋させて頂きました)

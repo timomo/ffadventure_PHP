@@ -21,6 +21,7 @@ function html_top() {
     $record = read_file( read_config_option( 'recode_file' ) );
     $img_path = read_config_option( 'img_path' );
     $chara_img = read_config_option( 'chara_img' );
+    $mark = read_config_option( 'mark' );
     $wchara = 0;
     
     if ( isset( $record[0] ) ) {
@@ -56,7 +57,7 @@ function html_top() {
 </form>
     <?= $kanri_message ?>
 <p>
-    現在の連勝記録は、<?= $rname ?>さんの「<a href="<?= $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 3"><?= $rsite ?></span></a>」、<?= $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="$mark" />マークがつきます。
+    現在の連勝記録は、<?= $rname ?>さんの「<a href="<?= $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 3"><?= $rsite ?></span></a>」、<?= $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="<?= $img_path ?>/<?= $mark ?>" />マークがつきます。
 <table border=0 width='100%'>
 <tr>
 <td width="500" valign="top">
