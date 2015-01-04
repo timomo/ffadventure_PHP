@@ -122,12 +122,12 @@ function decode_param() {
         if ( $_SERVER['CONTENT_LENGTH'] > 51200 ) {
             error_page( '投稿量が大きすぎます' );
         }
-        foreach ( $_POST as $key ) {
-            $IN[ $key ] = $_POST[ $key ];
+        foreach ( $_POST as $key => $value ) {
+            $IN[ $key ] = $value;
         }
     }
-    foreach ( $_GET as $key ) {
-        $IN[ $key ] = $_GET[ $key ];
+    foreach ( $_GET as $key => $value ) {
+        $IN[ $key ] = $value;
     }
     return $IN;
 }
