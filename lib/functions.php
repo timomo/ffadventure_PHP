@@ -70,8 +70,8 @@ function forward( $tmp ) {
     if ( array_key_exists( 'FFADV_COMMAND_MAP', $GLOBALS ) == false ) {
         set_command_map();
     }
-    
-    $mode = '';
+
+    $mode = $tmp['mode'];
     $func = $GLOBALS['FFADV_COMMAND_MAP'][ $mode ];
 
     if ( function_exists( $func ) ) {
@@ -114,4 +114,20 @@ function read_file( $path ) {
     }
     $contents = file( $path, FILE_USE_INCLUDE_PATH | FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
     return $contents;
+}
+
+function decode_param() {
+    $IN = array();
+    if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+        if ( $_SERVER['CONTENT_LENGTH'] > 51200 ) {
+            error_page( '投稿量が大きすぎます' );
+        }
+        foreach ( $_POST as $key ) {
+            $IN[ $key ] = $_POST[ $key ];
+        }
+    }
+    foreach ( $_GET as $key ) {
+        $IN[ $key ] = $_GET[ $key ];
+    }
+    return $IN;
 }

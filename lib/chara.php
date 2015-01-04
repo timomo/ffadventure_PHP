@@ -8,6 +8,7 @@
 
 function chara_make() {
     $script = read_config_option( 'script' );
+    $kiso_nouryoku = read_config_option( 'kiso_nouryoku' );
     show_header();
     ?>
     <h1>キャラクタ作成画面</h1>
