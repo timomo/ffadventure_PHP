@@ -9,6 +9,7 @@
 function chara_make() {
     $script = read_config_option( 'script' );
     $kiso_nouryoku = read_config_option( 'kiso_nouryoku' );
+    $chara_name = read_config_option( 'chara_name' );
     show_header();
     ?>
     <h1>キャラクタ作成画面</h1>
@@ -43,23 +44,21 @@ function chara_make() {
             <tr>
                 <td class="b1">キャラクターのイメージ</td>
                 <td><select name="chara">
-                        EOM
-
-                        $i=0;
-                        foreach(@chara_name){
-                        print "<option value=\"$i\">$chara_name[$i]\n";
-                            $i++;
-                            }
-
-                            print <<"EOM";
+                        <?php
+                        foreach( $chara_name as $no => $img ) {
+                        ?>
+                        <option value="<?php echo $no ?>"><?php echo $img ?></option>
+                        <?php
+                        }
+                        ?>
                     </select><br><small>△作成するキャラクターの性別を選択してください。</small></td>
             </tr>
             <tr>
-                <td class="b1">キャラクターの能\力</td>
+                <td class="b1">キャラクターの能力</td>
                 <td>
                     <table border=1>
                         <tr>
-                            <td class="b2" width="70">力</td><td class="b2" width="70">知能\</td><td class="b2" width="70">信仰心</td><td class="b2" width="70">生命力</td><td class="b2" width="70">器用さ</td><td class="b2" width="70">速さ</td><td class="b2" width="70">魅力</td>
+                            <td class="b2" width="70">力</td><td class="b2" width="70">知能</td><td class="b2" width="70">信仰心</td><td class="b2" width="70">生命力</td><td class="b2" width="70">器用さ</td><td class="b2" width="70">速さ</td><td class="b2" width="70">魅力</td>
                         </tr>
                         <tr>
                             <?php
@@ -87,7 +86,7 @@ function chara_make() {
                             ?>
                         </tr>
                     </table>
-                    <small>△ボーナスポイント「<b>$point</b>」をそれぞれに振り分けてください。(振り分けた合計が、$point以下になるように。<br>又どれかが最低12以上になるように。最高は18までです)</small>
+                    <small>△ボーナスポイント「<b><?php echo $point ?></b>」をそれぞれに振り分けてください。(振り分けた合計が、<?php echo $point ?>以下になるように。<br>又どれかが最低12以上になるように。最高は18までです)</small>
                 </td>
             </tr>
             <tr>
