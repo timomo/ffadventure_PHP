@@ -64,24 +64,19 @@ function chara_make() {
                             <?php
                             $point = rand( 0, 10 );
                             $point += 4;
-                            $i=0;
-                            $j=0;
-                            foreach ( range( 0, 6 ) as $number1 ) {
+                            foreach ( range( 0, 6 ) as $i ) {
                                 ?>
                                 <td><?php echo $kiso_nouryoku[$i] ?><select name="n_<?php echo $i ?>">
                                 <?php
-                                foreach( range( 0, $point ) as $number2 ) {
+                                foreach( range( 0, $point ) as $j ) {
                                     ?>
                                     <option value="<?php echo $j ?>"><?php echo $j ?></option>
                                     <?php
-                                    $j++;
                                 }
                                 ?>
                                 </select>
                                 </td>
                                 <?php
-                                $i++;
-                                $j=0;
                             }
                             ?>
                         </tr>
