@@ -13,4 +13,5 @@ require_once '../lib/html.php';
 require_once '../lib/chara.php';
 
 $IN = decode_param();
+var_dump( $IN );
 forward( $IN );
