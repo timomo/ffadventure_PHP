@@ -151,7 +151,7 @@ function chara_make_end( $in ) {
         <hr size="0">
         <p>あなたがなることができる職業は以下のとおりです。</p>
         <form action="<?php echo $script ?>" method="post">
-        <input type="hidden" name="mode" value="regist" />
+        <input type="hidden" name="mode" value="make_end" />
         <select name="syoku">
         <option value="0"><?php echo $chara_syoku[0] ?></option>
         <?php
