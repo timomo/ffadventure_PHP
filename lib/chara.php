@@ -264,7 +264,7 @@ function chara_make_end( $in ) {
             <tr>
                 <td rowspan="8" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $data['chara'] ] ?>"></td>
                 <td class="b1">なまえ</td>
-                <td><?php echo $data['c_name'] ?></td>
+                <td><?php echo $data['name'] ?></td>
                 <td class="b1">性別</td>
                 <td><?php echo $esex ?></td>
             </tr>
