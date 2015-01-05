@@ -170,14 +170,6 @@ function log_in( $in ) {
 	$vtime = $b_time - $ltime;
 	$mtime = $m_time - $ltime;
 	
-	read_stamina( $chara );
-	use_stamina( $chara, 0 );
-	regist_stamina( $chara );
-	
-	read_battlepoint( $chara );
-	use_battlepoint( $chara, 0 );
-	regist_battlepoint( $chara );
-	
 	if ( $chara["sex"] == 1 ) {
 		$esex = '男';
 	} else {
