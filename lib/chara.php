@@ -115,7 +115,7 @@ function chara_make_end( $in ) {
     /**
      * 職業未選択の場合
      */
-    if ( array_key_exists( $in, 'syoku' ) == false ) {
+    if ( array_key_exists( 'syoku', $in ) == false ) {
         if ( $in['id'] == '' || strlen( $in['id'] ) < 4 || strlen( $in['id'] ) > 8 ) {
             error_page( 'IDは、4文字以上、8文字以下で入力して下さい。' );
         }
