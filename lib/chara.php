@@ -88,7 +88,7 @@ function chara_make( $in ) {
                 <td colspan="2" align="center"><input type="submit" value="これで登録"></td>
             </tr>
         </table>
-        <input type="hidden" name=point value="$point">
+        <input type="hidden" name=point value="<?php echo $point ?>">
     </form>
 <?php
     show_footer();
