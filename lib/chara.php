@@ -393,6 +393,12 @@ function save_chara_data( $data ) {
     $text = convert_convert_chara_data_array2scalar( $data );
     $path = get_chara_data_path( $data["id"] );
     file_put_contents( $path, $text );
+    if ( array_key_exists( "stamina", $data ) ) {
+        save_stamina( $data );
+    }
+    if ( array_key_exists( "battlepoint", $data ) ) {
+        save_battlepoint( $data );
+    }
 }
 
 function get_chara_data_path ( $id ) {

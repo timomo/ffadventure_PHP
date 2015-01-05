@@ -240,6 +240,7 @@ EOF;
         $chara["hp"] = 0;
     }
 
+    use_stamina( $chara, 1 );
     save_chara_data( $chara );
     
     show_footer();
