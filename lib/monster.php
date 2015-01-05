@@ -35,6 +35,8 @@ function battle_monster( $in ) {
     $mhp_flg = $mhp;
     $win_flg = 0;
     
+    show_header();
+    
     foreach ( range( 1, $max_turn ) as $turn ) {
         $dmg1 = $chara["lv"] * ( rand( 0, 5 ) + 1 );
         $dmg2 = ( rand( 0, $mob["dmg"] ) + 1 ) + $mob["dmg"];
