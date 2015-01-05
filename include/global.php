@@ -75,7 +75,15 @@ $names_array = array(
     'kiso_hp',
     'kiso_exp',
     'max',
-    'max_gyo'
+    'max_gyo',
+    'stamina_path',
+    'stamina_ext',
+    'stamina_max',
+    'stamina_time',
+    'battlepoint_path',
+    'battlepoint_ext',
+    'battlepoint_max',
+    'battlepoint_time'
 );
 
 foreach ( $names_array as $key ) {

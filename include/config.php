@@ -601,6 +601,16 @@ $max = 100;
  */
 $max_gyo = 5;
 
+$stamina_path = "../data/stamina";
+$stamina_ext = "ini";
+$stamina_max = 10;
+$stamina_time = 60 * 3;
+
+$battlepoint_path = "../data/battlepoint";
+$battlepoint_ext = "ini";
+$battlepoint_max = 3;
+$battlepoint_time = 60 * 20;
+
 /**
  * [設定はここまで]------------------------------------------------------------
  */
