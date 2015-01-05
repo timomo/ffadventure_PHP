@@ -160,6 +160,8 @@ function log_in( $in ) {
 	$chara_syoku = read_config_option( 'chara_syoku' );
 	$max_gyo = read_config_option( 'max_gyo' );
 	$syoku_file = read_config_option( 'syoku_file' );
+	$yado_dai = read_config_option( 'yado_dai' );
+	$message_file = read_config_option( 'message_file' );
 
     // TODO: ファイルロック
 	$chara = login_chara_data( $in );
@@ -312,8 +314,8 @@ function log_in( $in ) {
 	$syoku = file( $syoku_file );
 
 	$hit = 0;
-	foreach( range( 0, count( $syoku ) ) as $i ) {
-		list( $a, $b, $c, $d, $e, $f, $g ) = implode( "<>", $syoku );
+	foreach( $syoku as $i => $line ) {
+		list( $a, $b, $c, $d, $e, $f, $g ) = implode( "<>", $line );
 		if ( $chara["n_0"] >= $a && $chara["n_1"] >= $b && $chara["n_2"] >= $c && $chara["n_3"] >= $d && $chara["n_4"] >= $e && $chara["n_5"] >= $f && $chara["n_6"] >= $g && $chara["syoku"] != $i ) {
 			?>
 			<option value="<?php echo $i ?>"><?php echo $chara_syoku[$i] ?></option>
@@ -323,43 +325,49 @@ function log_in( $in ) {
 	}
 	?>
 	</select>
-	<input type="hidden" name="id" value="$kid" />
-	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="tensyoku" />
-EOM
-
-	if(!$hit) { print "現在転職できる職業はありません"; }
-	else { print "<input type=submit value=\"転職する\">\n"; }
-
-	print <<"EOM";
+	<?php
+	if ( $hit == 0 ) {
+		?>
+		現在転職できる職業はありません
+		<?php
+	} else {
+		?>
+		<input type="submit" value="転職する" />
+		<?php
+	}
+	?>
 	<br>
 	　<small>※ 転職すると、全ての能\力値が転職した職業の初期値になります。また、LVも1になります。</small>
 	</form>
 	<form action="<?php echo $script ?>" method="post">
 	【魔物と戦い修行できます】<br />
-	<input type="hidden" name="id" value="$kid" />
-	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="monster" />
-EOM
-
-	if($ltime >= $m_time or !$ktotal) {
-		print "<input type=submit value=\"モンスターと闘う\"><br>\n";
+	<?php
+	if( $ltime >= $m_time or !$chara["total"] ) {
+		?>
+		<input type="submit" value="モンスターと闘う"><br />
+		<?php
 	}else{
-		print "$mtime秒後闘えるようになります。<br>\n";
+		?>
+		<?php echo $mtime ?>秒後闘えるようになります。<br />
+		<?php
 	}
-
-	$yado_gold = $yado_dai * $klv;
-
-	print <<"EOM";
+	$yado_gold = $yado_dai * $chara["lv"];
+	?>
 	　<small>※修行の旅にいけます。</small>
 	</form>
 	<form action="<?php echo $script ?>" method="post">
 	【旅の宿】<br>
-	<input type="hidden" name="id" value="$kid" />
-	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="yado" />
 	<input type="submit" value="体力を回復" /><br />
-	　<small>※体力を回復することができます。<b>$yado_gold</b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
+	　<small>※体力を回復することができます。<b><?php echo $yado_gold ?></b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
 	</form>
 	<form action="<?php echo $script ?>" method="post">
 	【他のキャラクターへメッセージを送る】<br />
@@ -380,9 +388,9 @@ EOM
 
 	print <<"EOM";
 	</select>
-	<input type="hidden" name="id" value="$kid" />
-	<input type="hidden" name="name" value="$kname" />
-	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="name" value="<?php echo $chara["name"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="message" />
 	<input type="submit" value="メッセージを送る"><br>
 	　<small>※他のキャラクターへメッセージを送ることができます。</small>
@@ -391,25 +399,35 @@ EOM
 	</tr>
 	</table>
 	【届いているメッセージ】表示数<b><?php echo $max_gyo ?></b>件まで<br>
-EOM
+	<?php
 
-	open(IN,"$message_file");
-	@MESSAGE_LOG = <IN>;
-	close(IN);
+	$MESSAGE_LOG = file( $message_file );
 
-	$hit=0;$i=1;
-	foreach(@MESSAGE_LOG){
-		($pid,$hid,$hname,$hmessage,$hhname,$htime) = split(/<>/);
-		if($kid eq "$pid"){
-			if($max_gyo < $i) { last; }
-			print "<hr size=0><small><b>$hnameさん</b>　＞ 「<b>$hmessage</b>」($htime)</small><br>\n";
-			$hit=1;$i++;
-		}elsif($kid eq "$hid"){
-			print "<hr size=0><small>$knameさんから$hhnameさんへ　＞ 「$hmessage」($htime)</small><br>\n";
+	$hit=0;
+	foreach ( $MESSAGE_LOG as $i => $line ){
+		list( $pid, $hid, $hname, $hmessage, $hhname, $htime) = implode( "<>", "" );
+		if ( $chara["id"] == $pid ) {
+			if( $max_gyo < $i ) {
+				break;
+			}
+			?>
+			<hr size="0" /><small><b><?php echo $hname ?>さん</b>　＞ 「<b><?php echo $hmessage ?></b>」(<?php echo $htime ?>)</small><br />
+			<?php
+			$hit=1;
+			$i++;
+		} elseif ( $chara["id"] == $hid ) {
+			?>
+			<hr size="0" /><small><?php echo $chara["name"] ?>さんから<?php echo $hhname ?>さんへ　＞ 「<?php echo $hmessage ?>」(<?php echo $htime ?>)</small><br />
+			<?php
 		}
 	}
-	if(!$hit){ print "<hr size=0>$knameさん宛てのメッセージはありません<p>\n"; }
-	print "<hr size=0><p>";
+	if(!$hit){
+		?>
+		<hr size="0" /><?php echo $chara["name"] ?>さん宛てのメッセージはありません
+		<?php
+	}
+	?>
+	<hr size="0" />
 	<?php
 	show_footer();
 
