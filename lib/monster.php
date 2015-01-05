@@ -10,6 +10,7 @@ function battle_monster( $in ) {
     $chara = login_chara_data( $in );
     $max_turn = read_config_option( "turn" );
     $chara_syoku = read_config_option( "chara_syoku" );
+    $lv_up = read_config_option( "lv_up" );
     
     if ( $chara["stamina"] == 0 ) {
         $stamina_time = read_config_option( 'stamina_time' );
@@ -36,6 +37,11 @@ function battle_monster( $in ) {
     $win_flg = 0;
     
     show_header();
+    
+    ?>
+    <h1><?php $chara["name"] ?>は<?php echo $mob["name"] ?>に戦いを挑んだ！</h1>
+    <hr size="0" />
+    <?php
     
     foreach ( range( 1, $max_turn ) as $turn ) {
         $dmg1 = $chara["lv"] * ( rand( 0, 5 ) + 1 );
@@ -151,12 +157,90 @@ EOF;
     if ( $win_flg == 1 ) {
         $chara["total"] += 1;
         $chara["kati"] += 1;
-        $chara["ex"] += $mob["ex"];
+        $mex = $mob["ex"];
+        $chara["ex"] += $mex;
         use_stamina( $chara, 1 );
         $gold = $chara["lv"] * 10 + rand( 0, $chara["lp"] );
         $chara["gold"] += $gold;
-        $comment = "";
+        ?>
+        <div>
+            <span style="font-size: 10pt;"><?php echo $chara["name"] ?>は戦闘に勝利した！！</span>
+            <?php echo $mex ?>の経験値を手に入れた。<br />
+            <?php echo $gold ?>Gを手に入れた。
+        </div>
+        <?php
+    } else {
+        $chara["total"] += 1;
+        $mex = rand( 0, $chara["lp"] );
+        $chara["ex"] += $mex;
+        use_stamina( $chara, 1 );
+        $gold = 0;
+        $chara["gold"] += $gold;
+        ?>
+        <div>
+            <span style="font-size: 10pt;"><?php echo $chara["name"] ?>は戦闘に負けた・・・。</span>
+            <?php echo $mex ?>の経験値を手に入れた。<br />
+            <?php echo $gold ?>Gを手に入れた。
+        </div>
+        <?php
     }
+    
+    if ( $chara["ex"] > ( $chara["lv"] * $lv_up ) ) {
+        $maxhp_flg = rand( 0, $chara["n_3"] ) + 1;
+        $chara["maxhp"] += $maxhp_flg;
+        $chara["hp"] = $chara["maxhp"];
+        $chara["ex"] = 0;
+        $chara["lv"] += 1;
+        $t = array( "", "", "", "", "", "", "" );
+        
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_0"] += 1;
+            $t[0] = "力";
+        }
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_1"] += 1;
+            $t[1] = "知力";
+        }
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_2"] += 1;
+            $t[2] = "信仰心";
+        }
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_3"] += 1;
+            $t[3] = "生命力";
+        }
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_4"] += 1;
+            $t[3] = "器用さ";
+        }
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_5"] += 1;
+            $t[3] = "速さ";
+        }
+        if ( rand( 0, 5 ) == 0 ) {
+            $chara["n_6"] += 1;
+            $t[3] = "魅力";
+        }
+
+        foreach ( range( 0, 6 ) as $i ) {
+            if ( $t[$i] == "" ) {
+                continue;
+            }
+            ?>
+            <?php echo $t[$i] ?>が上がった。<br />
+            <?php
+        }
+    }
+    
+    $chara["hp"] = $khp_flg + rand( 0, $chara["n_3"] );
+    if ( $chara["hp"] > $chara["maxhp"] ) {
+        $chara["hp"] = $chara["maxhp"];
+    }
+    if ( $chara["hp"] <= 0 ) {
+        $chara["hp"] = 0;
+    }
+    
+    show_footer();
 }
 
 /**
