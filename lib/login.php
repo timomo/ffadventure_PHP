@@ -148,35 +148,35 @@ function html_top() {
     show_footer();
 }
 
-function log_in() {
-/**
+function log_in( $in ) {
 	$chara_flag = 1;
+	
+	$b_time = read_config_option( 'b_time' );
+	$m_time = read_config_option( 'm_time' );
+	$lv_up = read_config_option( 'lv_up' );
+	$script = read_config_option( "script" );
+	$img_path = read_config_option( 'img_path' );
+	$chara_img = read_config_option( 'chara_img' );
+	$chara_syoku = read_config_option( 'chara_syoku' );
+	$max_gyo = read_config_option( 'max_gyo' );
 
     // TODO: ファイルロック
-
-	open(IN,"$chara_file");
-	@log_in = <IN>;
-	close(IN);
-
-	$hit=0;
-	foreach(@log_in){
-		($kid,$kpass,$ksite,$kurl,$kname,$ksex,$kchara,$kn_0,$kn_1,$kn_2,$kn_3,$kn_4,$kn_5,$kn_6,$ksyoku,$khp,$kmaxhp,$kex,$klv,$kgold,$klp,$ktotal,$kkati,$kwaza,$kitem,$kmons,$khost,$kdate) = split(/<>/);
-		if($in{'id'} eq "$kid" and $in{'pass'} eq "$kpass") {
-			$hit=1; last;
-		}
-	}
-
+	$chara = login_chara_data( $in );
 	$ltime = time();
-	$ltime = $ltime - $kdate;
+	$ltime = $ltime - $chara["date"];
 	$vtime = $b_time - $ltime;
 	$mtime = $m_time - $ltime;
+	
+	if ( $chara["sex"] == 1 ) {
+		$esex = '男';
+	} else {
+		$esex = '女';
+	}
+	$next_ex = $chara["lv"] * $lv_up;
 
-	if(!$hit) { &error("入力されたIDは登録されていません。又はパスワードが違います。"); }
+	/**
 
 	&class;
-
-	if($ksex) { $esex = "男"; } else { $esex = "女"; }
-	$next_ex = $klv * $lv_up;
 
 	open(IN,"$item_file");
 	@log_item = <IN>;
@@ -189,116 +189,124 @@ function log_in() {
 	}
 	if(!$hit) { $i_name=""; }
 
-	&header;
+	 * 
+	 */
+	
+	$i_name = "";
+	$class = "";
+	
+	show_header();
 
-	print <<"EOM";
-<h1>$knameさん用ステータス画面</h1>
-<hr size=0>
-EOM
-	if($ltime < $b_time or !$ktotal){
-	print <<"EOM";
-<FORM NAME="form1">
-チャンプと闘えるまで残り<INPUT TYPE="text" NAME="clock" SIZE="3" VALUE="$vtime">秒です。0になると、自動的に更新しますのでブラウザの更新は押さないで下さい。
-</FORM>
-EOM
+	?>
+	<h1><?php echo $chara["name"] ?>さん用ステータス画面</h1>
+	<hr size="0" />
+	<?php
+	if ( $ltime < $b_time or !$chara["total"] ) {
+	?>
+	<form name="form1">
+	チャンプと闘えるまで残り<input type="text" name="clock" size="3" value="<?php echo $vtime ?>" />秒です。0になると、自動的に更新しますのでブラウザの更新は押さないで下さい。
+	</form>
+	<?php
 	}
-	print <<"EOM";
-<form action="$script" method="post">
-<table border=0>
-<tr>
-<td valign=top width='50%'>
-<table border=1>
-<tr>
-<td colspan="5" class="b2" align="center">ホームページデータ</td>
-</tr>
-<tr>
-<td class="b1">ホームページ名</td>
-<td colspan="4"><input type="text" name=site value="$ksite" size=50></td>
-</tr>
-<tr>
-<td class="b1">ホームページのURL</td>
-<td colspan="4"><input type="text" name=url value="http\:\/\/$kurl" size=60></td>
-</tr>
-<tr>
-<td colspan="5" class="b2" align="center">キャラクターデータ</td>
-</tr>
-<tr>
-<td rowspan="8" align="center"><img src="$img_path/$chara_img[$kchara]"><br>武器：$i_name</td>
-<td class="b1">なまえ</td>
-<td><input type="text" name=c_name value="$kname" size=10></td>
-<td class="b1">性別</td>
-<td>$esex</td>
-</tr>
-<tr>
-<td class="b1">職業</td>
-<td>$chara_syoku[$ksyoku]</td>
-<td class="b1">クラス</td>
-<td>$class</td>
-</tr>
-<tr>
-<td class="b1">レベル</td>
-<td>$klv</td>
-<td class="b1">経験値</td>
-<td>$kex/$next_ex</td>
-</tr>
-<tr>
-<td class="b1">お金</td>
-<td>$kgold</td>
-<td class="b1">HP</td>
-<td>$khp\/$kmaxhp</td>
-</tr>
-<tr>
-<td class="b1">力</td>
-<td>$kn_0</td>
-<td class="b1">知能\</td>
-<td>$kn_1</td>
-</tr>
-<tr>
-<td class="b1">信仰心</td>
-<td>$kn_2</td>
-<td class="b1">生命力</td>
-<td>$kn_3</td>
-</tr>
-<tr>
-<td class="b1">器用さ</td>
-<td>$kn_4</td>
-<td class="b1">速さ</td>
-<td>$kn_5</td>
-</tr>
-<tr>
-<td class="b1">魅力</td>
-<td>$kn_6</td>
-<td class="b1">カルマ</td>
-<td>$klp</td>
-</tr>
-<tr>
-<td class="b1">技発動時コメント</td>
-<td colspan="4"><input type="text" name=waza value="$kwaza" size=50></td>
-</tr>
-<tr>
-<td colspan="5" align="center">
-<input type="hidden" name=mode value=battle>
-<input type="hidden" name=id value="$kid">
-<input type="hidden" name=pass value="$kpass">
-EOM
-	if($ltime >= $b_time or !$ktotal) {
-		print "<input type=\"submit\" value=\"チャンプに挑戦\">\n";
-	}else{
-		print "$vtime秒後闘えるようになります。\n";
+	?>
+	<form action="<?php echo $script ?>" method="post">
+	<table border="0">
+	<tr>
+	<td valign="top" width="50%">
+	<table border="1">
+	<tr>
+	<td colspan="5" class="b2" align="center">ホームページデータ</td>
+	</tr>
+	<tr>
+	<td class="b1">ホームページ名</td>
+	<td colspan="4"><input type="text" name="site" value="<?php echo $chara["site"] ?>" size="50" /></td>
+	</tr>
+	<tr>
+	<td class="b1">ホームページのURL</td>
+	<td colspan="4"><input type="text" name="url" value="<?php echo $chara["url"] ?>" size="60" /></td>
+	</tr>
+	<tr>
+	<td colspan="5" class="b2" align="center">キャラクターデータ</td>
+	</tr>
+	<tr>
+	<td rowspan="8" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $chara["chara"] ] ?>"><br>武器：<?php echo $i_name ?></td>
+	<td class="b1">なまえ</td>
+	<td><input type="text" name="c_name" value="<?php echo $chara["name"] ?>" size="10" /></td>
+	<td class="b1">性別</td>
+	<td><?php echo $esex ?></td>
+	</tr>
+	<tr>
+	<td class="b1">職業</td>
+	<td><?php echo $chara_syoku[ $chara["syoku"] ] ?></td>
+	<td class="b1">クラス</td>
+	<td><?php echo $class ?></td>
+	</tr>
+	<tr>
+	<td class="b1">レベル</td>
+	<td><?php echo $chara["lv"] ?></td>
+	<td class="b1">経験値</td>
+	<td><?php echo $chara["ex"] ?>/<?php echo $next_ex ?></td>
+	</tr>
+	<tr>
+	<td class="b1">お金</td>
+	<td><?php echo $chara["gold"] ?></td>
+	<td class="b1">HP</td>
+	<td><?php echo $chara["hp"] ?>/<?php echo $chara["maxhp"] ?></td>
+	</tr>
+	<tr>
+	<td class="b1">力</td>
+	<td><?php echo $chara["n_0"] ?></td>
+	<td class="b1">知能</td>
+	<td><?php echo $chara["n_1"] ?></td>
+	</tr>
+	<tr>
+	<td class="b1">信仰心</td>
+	<td><?php echo $chara["n_2"] ?></td>
+	<td class="b1">生命力</td>
+	<td><?php echo $chara["n_3"] ?></td>
+	</tr>
+	<tr>
+	<td class="b1">器用さ</td>
+	<td><?php echo $chara["n_4"] ?></td>
+	<td class="b1">速さ</td>
+	<td><?php echo $chara["n_5"] ?></td>
+	</tr>
+	<tr>
+	<td class="b1">魅力</td>
+	<td><?php echo $chara["n_6"] ?></td>
+	<td class="b1">カルマ</td>
+	<td><?php echo $chara["lp"] ?></td>
+	</tr>
+	<tr>
+	<td class="b1">技発動時コメント</td>
+	<td colspan="4"><input type="text" name="waza" value="<?php echo $chara["waza"] ?>" size="50" /></td>
+	</tr>
+	<tr>
+	<td colspan="5" align="center">
+	<input type="hidden" name="mode" value="battle" />
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
+	<?php
+	if ( $ltime >= $b_time or !$chara["total"] ) {
+	?>
+	<input type="submit" value="チャンプに挑戦" />
+	<?php
+	} else {
+	?>
+	<?php echo $vtime ?>秒後闘えるようになります。
+	<?php
 	}
-
-	print <<"EOM";
-</td>
-</tr>
-</table>
-</form>
-</td>
-<td valign="top">
-<form action="$script" method="post">
-【現在転職できる職業一覧】<br>
-<select name=syoku>
-<option value="no">選択してください。
-EOM
+	?>
+	</td>
+	</tr>
+	</table>
+	</form>
+	</td>
+	<td valign="top">
+	<form action="<?php echo $script ?>" method="post">
+	【現在転職できる職業一覧】<br />
+	<select name="syoku">
+	<option value="no">選択してください。</option>
 
 	open(IN,"$syoku_file");
 	@syoku = <IN>;
@@ -314,24 +322,24 @@ EOM
 		$i++;
 	}
 	print <<"EOM";
-</select>
-<input type=hidden name=id value=$kid>
-<input type=hidden name=pass value=$kpass>
-<input type=hidden name=mode value=tensyoku>
+	</select>
+	<input type="hidden" name="id" value="$kid" />
+	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="mode" value="tensyoku" />
 EOM
 
 	if(!$hit) { print "現在転職できる職業はありません"; }
 	else { print "<input type=submit value=\"転職する\">\n"; }
 
 	print <<"EOM";
-<br>
-　<small>※ 転職すると、全ての能\力値が転職した職業の初期値になります。また、LVも1になります。</small>
-</form>
-<form action="$script" method="post">
-【魔物と戦い修行できます】<br>
-<input type=hidden name=id value=$kid>
-<input type=hidden name=pass value=$kpass>
-<input type=hidden name=mode value=monster>
+	<br>
+	　<small>※ 転職すると、全ての能\力値が転職した職業の初期値になります。また、LVも1になります。</small>
+	</form>
+	<form action="<?php echo $script ?>" method="post">
+	【魔物と戦い修行できます】<br />
+	<input type="hidden" name="id" value="$kid" />
+	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="mode" value="monster" />
 EOM
 
 	if($ltime >= $m_time or !$ktotal) {
@@ -343,21 +351,21 @@ EOM
 	$yado_gold = $yado_dai * $klv;
 
 	print <<"EOM";
-　<small>※修行の旅にいけます。</small>
-</form>
-<form action="$script" method="post">
-【旅の宿】<br>
-<input type=hidden name=id value=$kid>
-<input type=hidden name=pass value=$kpass>
-<input type=hidden name=mode value=yado>
-<input type=submit value="体力を回復"><br>
-　<small>※体力を回復することができます。<b>$yado_gold</b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
-</form>
-<form action="$script" method="post">
-【他のキャラクターへメッセージを送る】<br>
-<input type="text" name=mes size=50><br>
-<select name=mesid>
-<option value="">送る相手を選択
+	　<small>※修行の旅にいけます。</small>
+	</form>
+	<form action="<?php echo $script ?>" method="post">
+	【旅の宿】<br>
+	<input type="hidden" name="id" value="$kid" />
+	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="mode" value="yado" />
+	<input type="submit" value="体力を回復" /><br />
+	　<small>※体力を回復することができます。<b>$yado_gold</b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
+	</form>
+	<form action="<?php echo $script ?>" method="post">
+	【他のキャラクターへメッセージを送る】<br />
+	<input type="text" name="mes" size="50"><br />
+	<select name="mesid">
+	<option value="">送る相手を選択</option>
 EOM
 
 	open(IN,"$chara_file");
@@ -371,18 +379,18 @@ EOM
 	}
 
 	print <<"EOM";
-</select>
-<input type=hidden name=id value=$kid>
-<input type=hidden name=name value=$kname>
-<input type=hidden name=pass value=$kpass>
-<input type=hidden name=mode value=message>
-<input type=submit value="メッセージを送る"><br>
-　<small>※他のキャラクターへメッセージを送ることができます。</small>
-</form>
-</td>
-</tr>
-</table>
-【届いているメッセージ】表\示数<b>$max_gyo</b>件まで<br>
+	</select>
+	<input type="hidden" name="id" value="$kid" />
+	<input type="hidden" name="name" value="$kname" />
+	<input type="hidden" name="pass" value="$kpass" />
+	<input type="hidden" name="mode" value="message" />
+	<input type="submit" value="メッセージを送る"><br>
+	　<small>※他のキャラクターへメッセージを送ることができます。</small>
+	</form>
+	</td>
+	</tr>
+	</table>
+	【届いているメッセージ】表示数<b><?php echo $max_gyo ?></b>件まで<br>
 EOM
 
 	open(IN,"$message_file");
@@ -402,15 +410,14 @@ EOM
 	}
 	if(!$hit){ print "<hr size=0>$knameさん宛てのメッセージはありません<p>\n"; }
 	print "<hr size=0><p>";
+	<?php
+	show_footer();
 
-	&footer;
-
+	/**
 	# ロック解除
 	if ($lockkey == 3) { &file'unlock; }
 	else { if(-e $lockfile) { unlink($lockfile); } }
-
-	$chara_flag=0;
-
-	exit;
-*/
+	 */
+	
+	$chara_flag = 0;
 }
