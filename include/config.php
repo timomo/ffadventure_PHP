@@ -56,7 +56,7 @@ $mente = 0;
  * 
  * @var string
  */
-$script = "./index.php";
+$script = "index.php";
 
 /**
  * CGIスクリプトまでの絶対パス（http://から）
@@ -66,39 +66,46 @@ $script = "./index.php";
 $script_url = "http://ffadv.special-thanks.me/index.php";
 
 /**
- * キャラクターデータファイル
+ * キャラクターデータパス
  * 
  * @var string
  */
-$chara_file  = "./chara.cgi";
+$chara_path = "../data/chara";
+
+/**
+ * キャラクターデータファイルの拡張子
+ * 
+ * @var string
+ */
+$chara_ext = "ini";
 
 /**
  * レコード(連勝記録用データファイル)
  * 
  * @var string
  */
-$recode_file= './data/recode.ini';
+$recode_file= '../data/recode.ini';
 
 /**
  * 勝利者データ
  * 
  * @var string
  */
-$winner_file= "./winner.cgi";
+$winner_file= "winner.cgi";
 
 /**
  * メッセージログファイル
  * 
  * @var string
  */
-$message_file = "./message.cgi";
+$message_file = "message.cgi";
 
 /**
  * 職業データファイル
  * 
  * @var string
  */
-$syoku_file= "./data/syoku.ini";
+$syoku_file= "../data/syoku.ini";
 
 /**
  * モンスターデータファイル
@@ -107,21 +114,21 @@ $syoku_file= "./data/syoku.ini";
  * 
  * @var string
  */
-$monster_file= "./data/monster.ini";
+$monster_file= "../data/monster.ini";
 
 /**
  * アイテムデータファイル
  * 
  * @var string
  */
-$item_file = "./data/item.ini";
+$item_file = "../data/item.ini";
 
 /**
  * 各職業に必要なパラメータ説明ページ
  * 
  * @var string
  */
-$syoku_html = "./index.html";
+$syoku_html = "index.html";
 
 /**
  * タイトル画像

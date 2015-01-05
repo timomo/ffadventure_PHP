@@ -6,7 +6,7 @@
  * Time: 21:44
  */
 
-function chara_make() {
+function chara_make( $in ) {
     $script = read_config_option( 'script' );
     $kiso_nouryoku = read_config_option( 'kiso_nouryoku' );
     $chara_name = read_config_option( 'chara_name' );
@@ -94,7 +94,273 @@ function chara_make() {
     show_footer();
 }
 
-function make_end() {
+function chara_make_end( $in ) {
+    $chara_stop = read_config_option( 'chara_stop' );
+    $kiso_nouryoku = read_config_option( 'kiso_nouryoku' );
+    $chara_syoku = read_config_option( 'chara_syoku' );
+    $script = read_config_option( 'script' );
+    $img_path = read_config_option( 'img_path' );
+    $chara_img = read_config_option( 'chara_img' );
+    $lv_up = read_config_option( 'lv_up' );
     
-    
+    if ( $chara_stop == 1 ) {
+        error_page( '現在キャラクターの作成登録はできません' );
+    }
+    if ( preg_match( '/[^0-9a-zA-Z]/', $in['id'] ) ) {
+        error_page( 'IDに半角英数字以外の文字が含まれています。' );
+    }
+    if ( preg_match( '/[^0-9a-zA-Z]/', $in['pass'] ) ) {
+        error_page( 'パスワードに半角英数字以外の文字が含まれています。' );
+    }
+    /**
+     * 職業未選択の場合
+     */
+    if ( array_key_exists( $in, 'syoku' ) == false ) {
+        if ( $in['id'] == '' || strlen( $in['id'] ) < 4 || strlen( $in['id'] ) > 8 ) {
+            error_page( 'IDは、4文字以上、8文字以下で入力して下さい。' );
+        }
+        if ( $in['pass'] == '' || strlen( $in['pass'] ) < 4 || strlen( $in['pass'] ) > 8 ) {
+            error_page( 'パスワードは、4文字以上、8文字以下で入力して下さい。' );
+        }
+        if ( $in['site'] == '' ) {
+            error_page( 'ホームページ名が未記入です' );
+        }
+        if ( $in['url'] == '' ) {
+            error_page( 'URLが未記入です' );
+        }
+        if ( $in['c_name'] == '' ) {
+            error_page( 'キャラクターの名前が未記入です' );
+        }
+        if ( $in['sex'] == '' ) {
+            error_page( '性別が選択されていません' );
+        }
+        if ( check_dup_id( $in['id'] ) == false ) {
+            error_page( 'そのIDはすでに登録されています' );
+        }
+        
+        $g = $in['n_0'] + $in['n_1'] + $in['n_2'] + $in['n_3'] + $in['n_4'] + $in['n_5'] + $in['n_6'];
+        
+        if ( $g > $in['point'] ) {
+            error_page( 'ポイントの振り分けが多すぎます。振り分けの合計を、'. $in['point'] .'以下にしてください。' );
+        }
+
+        show_header();
+
+        ?>
+        <h1>職業選択画面</h1>
+        <hr size="0">
+        <p>あなたがなることができる職業は以下のとおりです。</p>
+        <form action="<?php echo $script ?>" method="post">
+        <input type="hidden" name="mode" value="regist" />
+        <select name="syoku">
+        <option value="0"><?php echo $chara_syoku[0] ?></option>
+        <?php
+        
+        if ( $in['n_1'] + $kiso_nouryoku[1] > 11 ) {
+            ?>
+            <option value="1"><?php echo $chara_syoku[1] ?></option>
+            <?php
+        }
+        if ( $in['n_2'] + $kiso_nouryoku[2] > 11 && $in['n_6'] + $kiso_nouryoku[6] > 7 ) {
+            ?>
+            <option value="2"><?php echo $chara_syoku[2] ?></option>
+            <?php
+        }
+        if ( $in['n_4'] + $kiso_nouryoku[4] > 11 && $in['n_5'] + $kiso_nouryoku[5] > 7 ) {
+            ?>
+            <option value="3"><?php echo $chara_syoku[3] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 9 && $in['n_1'] + $kiso_nouryoku[1] > 7 && $in['n_2'] + $kiso_nouryoku[2] > 7 && $in['n_3'] + $kiso_nouryoku[3] > 10 && $in['n_4'] + $kiso_nouryoku[4] > 9 && $in['n_5'] + $kiso_nouryoku[5] > 7 && $in['n_6'] + $kiso_nouryoku[6] > 7 ) {
+            ?>
+            <option value="4"><?php echo $chara_syoku[4] ?></option>
+            <?php
+        }
+        if ( $in['n_1'] + $kiso_nouryoku[1] > 12 && $in['n_4'] + $kiso_nouryoku[4] > 12 ) {
+            ?>
+            <option value="5"><?php echo $chara_syoku[5] ?></option>
+            <?php
+        }
+        if ( $in['n_1'] + $kiso_nouryoku[1] > 9 && $in['n_4'] + $kiso_nouryoku[4] > 11 && $in['n_5'] + $kiso_nouryoku[5] > 7 && $in['n_6'] + $kiso_nouryoku[6] > 11 ) {
+            ?>
+            <option value="6"><?php echo $chara_syoku[6] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 9 && $in['n_1'] + $kiso_nouryoku[1] > 13 && $in['n_3'] + $kiso_nouryoku[3] > 13 && $in['n_6'] + $kiso_nouryoku[6] > 9 ) {
+            ?>
+            <option value="7"><?php echo $chara_syoku[7] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 9 && $in['n_2'] + $kiso_nouryoku[2] > 10 && $in['n_3'] + $kiso_nouryoku[3] > 10 && $in['n_4'] + $kiso_nouryoku[4] > 9 && $in['n_5'] + $kiso_nouryoku[5] > 10 && $in['n_6'] + $kiso_nouryoku[6] > 7 ) {
+            ?>
+            <option value="8"><?php echo $chara_syoku[8] ?></option>
+            <?php
+        }
+        if ( $in['n_1'] + $kiso_nouryoku[1] > 14 && $in['n_2'] + $kiso_nouryoku[2] > 14 && $in['n_6'] + $kiso_nouryoku[6] > 7 ) {
+            ?>
+            <option value="9"><?php echo $chara_syoku[9] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 11 && $in['n_1'] + $kiso_nouryoku[1] > 8 && $in['n_2'] + $kiso_nouryoku[2] > 11 && $in['n_3'] + $kiso_nouryoku[3] > 11 && $in['n_4'] + $kiso_nouryoku[4] > 8 && $in['n_5'] + $kiso_nouryoku[5] > 8 && $in['n_6'] + $kiso_nouryoku[6] > 13 ) {
+            ?>
+            <option value="10"><?php echo $chara_syoku[10] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 11 && $in['n_1'] + $kiso_nouryoku[1] > 10 && $in['n_3'] + $kiso_nouryoku[3] > 8 && $in['n_4'] + $kiso_nouryoku[4] > 11 && $in['n_5'] + $kiso_nouryoku[5] > 13 && $in['n_6'] + $kiso_nouryoku[6] > 7 ) {
+            ?>
+            <option value="11"><?php echo $chara_syoku[11] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 12 && $in['n_1'] + $kiso_nouryoku[1] > 7 && $in['n_2'] + $kiso_nouryoku[2] > 12 && $in['n_4'] + $kiso_nouryoku[4] > 9 && $in['n_5'] + $kiso_nouryoku[5] > 12 && $in['n_6'] + $kiso_nouryoku[6] > 7 ) {
+            ?>
+            <option value="12"><?php echo $chara_syoku[12] ?></option>
+            <?php
+        }
+        if ( $in['n_0'] + $kiso_nouryoku[0] > 11 && $in['n_1'] + $kiso_nouryoku[1] > 9 && $in['n_2'] + $kiso_nouryoku[2] > 9 && $in['n_3'] + $kiso_nouryoku[3] > 11 && $in['n_4'] + $kiso_nouryoku[4] > 11 && $in['n_5'] + $kiso_nouryoku[5] > 11 ) {
+            ?>
+            <option value="13"><?php echo $chara_syoku[13] ?></option>
+            <?php
+        }
+        ?>
+        </select>
+        <input type="hidden" name="new" value="new" />
+        <input type="hidden" name="id" value="<?php echo $in['id'] ?>" />
+        <input type="hidden" name="pass" value="<?php echo $in['pass'] ?>" />
+        <input type="hidden" name="site" value="<?php echo $in['site'] ?>" />
+        <input type="hidden" name="url" value="<?php echo $in['url'] ?>" />
+        <input type="hidden" name="c_name" value="<?php echo $in['c_name'] ?>" />
+        <input type="hidden" name="sex" value="<?php echo $in['sex'] ?>" />
+        <input type="hidden" name="chara" value="<?php echo $in['chara'] ?>" />
+        <input type="hidden" name="n_0" value="<?php echo $in['n_0'] ?>" />
+        <input type="hidden" name="n_1" value="<?php echo $in['n_1'] ?>" />
+        <input type="hidden" name="n_2" value="<?php echo $in['n_2'] ?>" />
+        <input type="hidden" name="n_3" value="<?php echo $in['n_3'] ?>" />
+        <input type="hidden" name="n_4" value="<?php echo $in['n_4'] ?>" />
+        <input type="hidden" name="n_5" value="<?php echo $in['n_5'] ?>" />
+        <input type="hidden" name="n_6" value="<?php echo $in['n_6'] ?>" />
+        <input type="submit" value="この職業でOK" />
+        </form>
+        <?php
+        show_footer();
+    } else {
+        $data = chara_regist_new( $in );
+        
+        if ( $data['sex'] == 1 ) {
+            $esex = '男';
+        } else {
+            $esex = '女';
+        }
+        $next_ex = $data['lv'] * $lv_up;
+        show_header();
+        ?>
+        <h1>登録完了画面</h1>
+        以下の内容で登録が完了しました。
+        <hr size="0">
+        <table border="1">
+            <tr>
+                <td class="b1">ホームページ</td>
+                <td colspan="4"><a href="<?php echo $data['url'] ?>"><?php echo $data['site'] ?></a></td>
+            </tr>
+            <tr>
+                <td rowspan="8" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $data['chara'] ] ?>"></td>
+                <td class="b1">なまえ</td>
+                <td><?php echo $data['c_name'] ?></td>
+                <td class="b1">性別</td>
+                <td><?php echo $esex ?></td>
+            </tr>
+            <tr>
+                <td class="b1">職業</td>
+                <td><?php echo $chara_syoku[ $data['syoku'] ] ?></td>
+                <td class="b1">お金</td>
+                <td><?php echo $data['gold'] ?></td>
+            </tr>
+            <tr>
+                <td class="b1">レベル</td>
+                <td><?php echo $data['lv'] ?></td>
+                <td class="b1">経験値</td>
+                <td><?php echo $data['ex'] ?>/<?php echo $next_ex ?></td>
+            </tr>
+            <tr>
+                <td class="b1">HP</td>
+                <td><?php echo $data['hp'] ?></td>
+                <td class="b1"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="b1">力</td>
+                <td><?php echo $data['n_0'] ?></td>
+                <td class="b1">知能\</td>
+                <td><?php echo $data['n_1'] ?></td>
+            </tr>
+            <tr>
+                <td class="b1">信仰心</td>
+                <td><?php echo $data['n_2'] ?></td>
+                <td class="b1">生命力</td>
+                <td><?php echo $data['n_3'] ?></td>
+            </tr>
+            <tr>
+                <td class="b1">器用さ</td>
+                <td><?php echo $data['n_4'] ?></td>
+                <td class="b1">速さ</td>
+                <td><?php echo $data['n_5'] ?></td>
+            </tr>
+            <tr>
+                <td class="b1">魅力</td>
+                <td><?php echo $data['n_6'] ?></td>
+                <td class="b1">カルマ</td>
+                <td><?php echo $data['lp'] ?></td>
+            </tr>
+        </table>
+        <form action="<?php echo $script ?>" method="post">
+            <input type="hidden" name="mode" value="log_in" />
+            <input type="hidden" name="id" value="<?php echo $data['id'] ?>" />
+            <input type="hidden" name="pass" value="<?php echo $data['pass'] ?>" />
+            <input type="submit" value="ステータス画面へ">
+        </form>
+        <?php
+        show_footer();
+    }
+}
+
+/**
+ * @param array $in
+ * @return mixed
+ */
+function chara_regist_new( $in ) {
+    $chara_file = get_chara_data_path( $in['id'] );
+    $kiso_nouryoku = read_config_option( 'kiso_nouryoku' );
+    $kiso_hp = read_config_option( 'kiso_hp' );
+
+    /**
+     * 念のため、もう一回ID重複チェック
+     */
+    if ( check_dup_id( $in['id'] ) == false ) {
+        error_page( 'そのIDはすでに登録されています' );
+    }
+    $data = $in;
+    $data['name'] = $data['c_name'];
+    unset( $data['c_name'] );
+    $data['lp'] = rand( 0, 15 );
+    $data['hp'] = ( $in['n_3'] + $kiso_nouryoku[3] ) + rand( 0, $data['lp'] ) + $kiso_hp;
+    $data['maxhp'] = $data['hp'];
+    $data['ex'] = 0;
+    $data['lv'] = 1;
+    $data['gold'] = 0;
+    $data['total'] = 0;
+    $data['kati'] = 0;
+    $data['waza'] = '';
+    $data['item'] = '';
+    $data['mons'] = 0;
+    $data['host'] = '';
+    $data['date'] = time();
+    $data['n_0'] += $kiso_nouryoku[0];
+    $data['n_1'] += $kiso_nouryoku[1];
+    $data['n_2'] += $kiso_nouryoku[2];
+    $data['n_3'] += $kiso_nouryoku[3];
+    $data['n_4'] += $kiso_nouryoku[4];
+    $data['n_5'] += $kiso_nouryoku[5];
+    $data['n_6'] += $kiso_nouryoku[6];
+    $text = convert_convert_chara_data_data2scalar( $data );
+    file_put_contents( $chara_file, $text );
+    return $data;
 }
