@@ -363,6 +363,9 @@ function log_in( $in ) {
 		<?php
 	}
 	$yado_gold = $yado_dai * $chara["lv"];
+	if ( $chara["gold"] <= $yado_dai ) {
+		$yado_gold = $chara["gold"];
+	}
 	?>
 	　<small>※修行の旅にいけます。</small>
 	</form>

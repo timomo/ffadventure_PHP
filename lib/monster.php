@@ -239,7 +239,7 @@ EOF;
     if ( $chara["hp"] <= 0 ) {
         $chara["hp"] = 0;
     }
-    
+
     save_chara_data( $chara );
     
     show_footer();
