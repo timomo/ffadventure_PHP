@@ -389,6 +389,12 @@ function login_chara_data( $in ) {
     return $data;
 }
 
+function save_chara_data( $data ) {
+    $text = convert_convert_chara_data_array2scalar( $data );
+    $path = get_chara_data_path( $data["id"] );
+    file_put_contents( $path, $text );
+}
+
 function get_chara_data_path ( $id ) {
     $chara_path = read_config_option( 'chara_path' );
     $chara_ext = read_config_option( 'chara_ext' );

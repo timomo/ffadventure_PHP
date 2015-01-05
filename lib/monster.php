@@ -39,7 +39,7 @@ function battle_monster( $in ) {
     show_header();
     
     ?>
-    <h1><?php $chara["name"] ?>は<?php echo $mob["name"] ?>に戦いを挑んだ！</h1>
+    <h1><?php echo $chara["name"] ?>は<?php echo $mob["name"] ?>に戦いを挑んだ！</h1>
     <hr size="0" />
     <?php
     
@@ -239,6 +239,8 @@ EOF;
     if ( $chara["hp"] <= 0 ) {
         $chara["hp"] = 0;
     }
+
+    save_chara_data( $chara );
     
     show_footer();
 }
