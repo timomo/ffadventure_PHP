@@ -159,6 +159,7 @@ function log_in( $in ) {
 	$chara_img = read_config_option( 'chara_img' );
 	$chara_syoku = read_config_option( 'chara_syoku' );
 	$max_gyo = read_config_option( 'max_gyo' );
+	$syoku_file = read_config_option( 'syoku_file' );
 
     // TODO: ファイルロック
 	$chara = login_chara_data( $in );
@@ -307,21 +308,20 @@ function log_in( $in ) {
 	【現在転職できる職業一覧】<br />
 	<select name="syoku">
 	<option value="no">選択してください。</option>
+	<?php
+	$syoku = file( $syoku_file );
 
-	open(IN,"$syoku_file");
-	@syoku = <IN>;
-	close(IN);
-
-	$i=0;$hit=0;
-	foreach(@syoku){
-		($a,$b,$c,$d,$e,$f,$g) = split(/<>/);
-		if($kn_0 >= $a and $kn_1 >= $b and $kn_2 >= $c and $kn_3 >= $d and $kn_4 >= $e and $kn_5 >= $f and $kn_6 >= $g and $ksyoku != $i) {
-			print "<option value=\"$i\">$chara_syoku[$i]\n";
-			$hit=1;
+	$hit = 0;
+	foreach( range( 0, count( $syoku ) ) as $i ) {
+		list( $a, $b, $c, $d, $e, $f, $g ) = implode( "<>", $syoku );
+		if ( $chara["n_0"] >= $a && $chara["n_1"] >= $b && $chara["n_2"] >= $c && $chara["n_3"] >= $d && $chara["n_4"] >= $e && $chara["n_5"] >= $f && $chara["n_6"] >= $g && $chara["syoku"] != $i ) {
+			?>
+			<option value="<?php echo $i ?>"><?php echo $chara_syoku[$i] ?></option>
+			<?php
+			$hit = 1;
 		}
-		$i++;
 	}
-	print <<"EOM";
+	?>
 	</select>
 	<input type="hidden" name="id" value="$kid" />
 	<input type="hidden" name="pass" value="$kpass" />
