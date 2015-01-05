@@ -16,6 +16,9 @@ function yado( $in ) {
     }
     
     $chara["hp"] = $chara["maxhp"];
+    $chara["gold"] -= $yado_gold;
+    
+    save_chara_data( $chara );
 
     show_header();
     
