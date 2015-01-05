@@ -6,7 +6,7 @@
  * Time: 14:51
  */
 
-function read_stamina( &$data ) {
+function load_stamina( &$data ) {
     $stamina_path = read_config_option( 'stamina_path' );
     $stamina_ext = read_config_option( 'stamina_ext' );
     $stamina_max = read_config_option( 'stamina_max' );
@@ -29,7 +29,7 @@ function read_stamina( &$data ) {
     $data["staminadate"] = $tmp[2];
 }
 
-function read_battlepoint( &$data ) {
+function load_battlepoint( &$data ) {
     $battlepoint_path = read_config_option( 'battlepoint_path' );
     $battlepoint_ext = read_config_option( 'battlepoint_ext' );
     $battlepoint_max = read_config_option( 'battlepoint_max' );
@@ -94,7 +94,7 @@ function calc_battlepoint( &$data ) {
     }
 }
 
-function regist_stamina( &$data ) {
+function save_stamina( &$data ) {
     $stamina_path = read_config_option( 'stamina_path' );
     $stamina_ext = read_config_option( 'stamina_ext' );
     $path = cat_file( $stamina_path, $data["id"]. '.'. $stamina_ext );
@@ -103,7 +103,7 @@ function regist_stamina( &$data ) {
     file_put_contents( $path, $text );
 }
 
-function regist_battlepoint( &$data ) {
+function save_battlepoint( &$data ) {
     $battlepoint_path = read_config_option( 'battlepoint_path' );
     $battlepoint_ext = read_config_option( 'battlepoint_ext' );
     $path = cat_file( $battlepoint_path, $data["id"]. '.'. $battlepoint_ext );

@@ -10,8 +10,8 @@
  * @return void
  */
 function html_top() {
-    $c_id = 'test1';
-    $c_pass = 'test2';
+    $c_id = 'test';
+    $c_pass = 'test';
     $script = read_config_option( 'script' );
     $homepage = read_config_option( 'homepage' );
     $title_img = read_config_option( 'title_img' );

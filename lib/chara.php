@@ -380,6 +380,12 @@ function login_chara_data( $in ) {
     if ( $data["pass"] != $in["pass"] ) {
         error_page( "IDかパスワードが間違っています。" );
     }
+    load_stamina( $data );
+    use_stamina( $data, 0 );
+    save_stamina( $data );
+    load_battlepoint( $data );
+    use_battlepoint( $data, 0 );
+    save_battlepoint( $data );
     return $data;
 }
 
