@@ -157,15 +157,3 @@ function check_dup_id ( $id ) {
     }
     return true;
 }
-
-function get_chara_data_path ( $id ) {
-    $chara_path = read_config_option( 'chara_path' );
-    $chara_ext = read_config_option( 'chara_ext' );
-    $chara_file = cat_file( $chara_path, $id. '.'. $chara_ext );
-    return $chara_file;
-}
-
-function convert_convert_chara_data_data2scalar( $data ) {
-    $text = implode( "<>", array( $data['id'], $data['pass'], $data['site'], $data['url'], $data['name'], $data['sex'], $data['chara'], $data['n_0'], $data['n_1'], $data['n_2'], $data['n_3'], $data['n_4'], $data['n_5'], $data['n_6'], $data['syoku'], $data['hp'], $data['maxhp'], $data['ex'], $data['lv'], $data['gold'], $data['lp'], $data['total'], $data['kati'], $data['waza'], $data['item'], $data['mons'], $data['host'], $data['date'], '' ) );
-    return $text;
-}

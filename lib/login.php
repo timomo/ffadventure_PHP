@@ -148,3 +148,269 @@ function html_top() {
     show_footer();
 }
 
+function log_in() {
+/**
+	$chara_flag = 1;
+
+    // TODO: ファイルロック
+
+	open(IN,"$chara_file");
+	@log_in = <IN>;
+	close(IN);
+
+	$hit=0;
+	foreach(@log_in){
+		($kid,$kpass,$ksite,$kurl,$kname,$ksex,$kchara,$kn_0,$kn_1,$kn_2,$kn_3,$kn_4,$kn_5,$kn_6,$ksyoku,$khp,$kmaxhp,$kex,$klv,$kgold,$klp,$ktotal,$kkati,$kwaza,$kitem,$kmons,$khost,$kdate) = split(/<>/);
+		if($in{'id'} eq "$kid" and $in{'pass'} eq "$kpass") {
+			$hit=1; last;
+		}
+	}
+
+	$ltime = time();
+	$ltime = $ltime - $kdate;
+	$vtime = $b_time - $ltime;
+	$mtime = $m_time - $ltime;
+
+	if(!$hit) { &error("入力されたIDは登録されていません。又はパスワードが違います。"); }
+
+	&class;
+
+	if($ksex) { $esex = "男"; } else { $esex = "女"; }
+	$next_ex = $klv * $lv_up;
+
+	open(IN,"$item_file");
+	@log_item = <IN>;
+	close(IN);
+
+	$hit=0;
+	foreach(@log_item){
+		($i_no,$i_name,$i_dmg,$i_gold) = split(/<>/);
+		if($kitem eq "$i_no"){ $hit=1;last; }
+	}
+	if(!$hit) { $i_name=""; }
+
+	&header;
+
+	print <<"EOM";
+<h1>$knameさん用ステータス画面</h1>
+<hr size=0>
+EOM
+	if($ltime < $b_time or !$ktotal){
+	print <<"EOM";
+<FORM NAME="form1">
+チャンプと闘えるまで残り<INPUT TYPE="text" NAME="clock" SIZE="3" VALUE="$vtime">秒です。0になると、自動的に更新しますのでブラウザの更新は押さないで下さい。
+</FORM>
+EOM
+	}
+	print <<"EOM";
+<form action="$script" method="post">
+<table border=0>
+<tr>
+<td valign=top width='50%'>
+<table border=1>
+<tr>
+<td colspan="5" class="b2" align="center">ホームページデータ</td>
+</tr>
+<tr>
+<td class="b1">ホームページ名</td>
+<td colspan="4"><input type="text" name=site value="$ksite" size=50></td>
+</tr>
+<tr>
+<td class="b1">ホームページのURL</td>
+<td colspan="4"><input type="text" name=url value="http\:\/\/$kurl" size=60></td>
+</tr>
+<tr>
+<td colspan="5" class="b2" align="center">キャラクターデータ</td>
+</tr>
+<tr>
+<td rowspan="8" align="center"><img src="$img_path/$chara_img[$kchara]"><br>武器：$i_name</td>
+<td class="b1">なまえ</td>
+<td><input type="text" name=c_name value="$kname" size=10></td>
+<td class="b1">性別</td>
+<td>$esex</td>
+</tr>
+<tr>
+<td class="b1">職業</td>
+<td>$chara_syoku[$ksyoku]</td>
+<td class="b1">クラス</td>
+<td>$class</td>
+</tr>
+<tr>
+<td class="b1">レベル</td>
+<td>$klv</td>
+<td class="b1">経験値</td>
+<td>$kex/$next_ex</td>
+</tr>
+<tr>
+<td class="b1">お金</td>
+<td>$kgold</td>
+<td class="b1">HP</td>
+<td>$khp\/$kmaxhp</td>
+</tr>
+<tr>
+<td class="b1">力</td>
+<td>$kn_0</td>
+<td class="b1">知能\</td>
+<td>$kn_1</td>
+</tr>
+<tr>
+<td class="b1">信仰心</td>
+<td>$kn_2</td>
+<td class="b1">生命力</td>
+<td>$kn_3</td>
+</tr>
+<tr>
+<td class="b1">器用さ</td>
+<td>$kn_4</td>
+<td class="b1">速さ</td>
+<td>$kn_5</td>
+</tr>
+<tr>
+<td class="b1">魅力</td>
+<td>$kn_6</td>
+<td class="b1">カルマ</td>
+<td>$klp</td>
+</tr>
+<tr>
+<td class="b1">技発動時コメント</td>
+<td colspan="4"><input type="text" name=waza value="$kwaza" size=50></td>
+</tr>
+<tr>
+<td colspan="5" align="center">
+<input type="hidden" name=mode value=battle>
+<input type="hidden" name=id value="$kid">
+<input type="hidden" name=pass value="$kpass">
+EOM
+	if($ltime >= $b_time or !$ktotal) {
+		print "<input type=\"submit\" value=\"チャンプに挑戦\">\n";
+	}else{
+		print "$vtime秒後闘えるようになります。\n";
+	}
+
+	print <<"EOM";
+</td>
+</tr>
+</table>
+</form>
+</td>
+<td valign="top">
+<form action="$script" method="post">
+【現在転職できる職業一覧】<br>
+<select name=syoku>
+<option value="no">選択してください。
+EOM
+
+	open(IN,"$syoku_file");
+	@syoku = <IN>;
+	close(IN);
+
+	$i=0;$hit=0;
+	foreach(@syoku){
+		($a,$b,$c,$d,$e,$f,$g) = split(/<>/);
+		if($kn_0 >= $a and $kn_1 >= $b and $kn_2 >= $c and $kn_3 >= $d and $kn_4 >= $e and $kn_5 >= $f and $kn_6 >= $g and $ksyoku != $i) {
+			print "<option value=\"$i\">$chara_syoku[$i]\n";
+			$hit=1;
+		}
+		$i++;
+	}
+	print <<"EOM";
+</select>
+<input type=hidden name=id value=$kid>
+<input type=hidden name=pass value=$kpass>
+<input type=hidden name=mode value=tensyoku>
+EOM
+
+	if(!$hit) { print "現在転職できる職業はありません"; }
+	else { print "<input type=submit value=\"転職する\">\n"; }
+
+	print <<"EOM";
+<br>
+　<small>※ 転職すると、全ての能\力値が転職した職業の初期値になります。また、LVも1になります。</small>
+</form>
+<form action="$script" method="post">
+【魔物と戦い修行できます】<br>
+<input type=hidden name=id value=$kid>
+<input type=hidden name=pass value=$kpass>
+<input type=hidden name=mode value=monster>
+EOM
+
+	if($ltime >= $m_time or !$ktotal) {
+		print "<input type=submit value=\"モンスターと闘う\"><br>\n";
+	}else{
+		print "$mtime秒後闘えるようになります。<br>\n";
+	}
+
+	$yado_gold = $yado_dai * $klv;
+
+	print <<"EOM";
+　<small>※修行の旅にいけます。</small>
+</form>
+<form action="$script" method="post">
+【旅の宿】<br>
+<input type=hidden name=id value=$kid>
+<input type=hidden name=pass value=$kpass>
+<input type=hidden name=mode value=yado>
+<input type=submit value="体力を回復"><br>
+　<small>※体力を回復することができます。<b>$yado_gold</b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
+</form>
+<form action="$script" method="post">
+【他のキャラクターへメッセージを送る】<br>
+<input type="text" name=mes size=50><br>
+<select name=mesid>
+<option value="">送る相手を選択
+EOM
+
+	open(IN,"$chara_file");
+	@MESSAGE = <IN>;
+	close(IN);
+
+	foreach(@MESSAGE) {
+		($did,$dpass,$dsite,$durl,$dname) = split(/<>/);
+		if($kid eq $did) { next; }
+		print "<option value=$did>$dnameさんへ\n";
+	}
+
+	print <<"EOM";
+</select>
+<input type=hidden name=id value=$kid>
+<input type=hidden name=name value=$kname>
+<input type=hidden name=pass value=$kpass>
+<input type=hidden name=mode value=message>
+<input type=submit value="メッセージを送る"><br>
+　<small>※他のキャラクターへメッセージを送ることができます。</small>
+</form>
+</td>
+</tr>
+</table>
+【届いているメッセージ】表\示数<b>$max_gyo</b>件まで<br>
+EOM
+
+	open(IN,"$message_file");
+	@MESSAGE_LOG = <IN>;
+	close(IN);
+
+	$hit=0;$i=1;
+	foreach(@MESSAGE_LOG){
+		($pid,$hid,$hname,$hmessage,$hhname,$htime) = split(/<>/);
+		if($kid eq "$pid"){
+			if($max_gyo < $i) { last; }
+			print "<hr size=0><small><b>$hnameさん</b>　＞ 「<b>$hmessage</b>」($htime)</small><br>\n";
+			$hit=1;$i++;
+		}elsif($kid eq "$hid"){
+			print "<hr size=0><small>$knameさんから$hhnameさんへ　＞ 「$hmessage」($htime)</small><br>\n";
+		}
+	}
+	if(!$hit){ print "<hr size=0>$knameさん宛てのメッセージはありません<p>\n"; }
+	print "<hr size=0><p>";
+
+	&footer;
+
+	# ロック解除
+	if ($lockkey == 3) { &file'unlock; }
+	else { if(-e $lockfile) { unlink($lockfile); } }
+
+	$chara_flag=0;
+
+	exit;
+*/
+}

@@ -360,7 +360,85 @@ function chara_regist_new( $in ) {
     $data['n_4'] += $kiso_nouryoku[4];
     $data['n_5'] += $kiso_nouryoku[5];
     $data['n_6'] += $kiso_nouryoku[6];
-    $text = convert_convert_chara_data_data2scalar( $data );
+    $text = convert_convert_chara_data_array2scalar( $data );
     file_put_contents( $chara_file, $text );
+    return $data;
+}
+
+function load_chara_data( $id ) {
+    $chara_data = get_chara_data_path( $id );
+    if ( file_exists( $chara_data ) == false ) {
+        return null;
+    }
+    $text = file_get_contents( $chara_data );
+    $data = convert_convert_chara_data_scalar2array( $text );
+    return $data;
+}
+
+function login_chara_data( $in ) {
+    $data = load_chara_data( $in["id"] );
+    if ( $data["pass"] != $in["pass"] ) {
+        error_page( "IDかパスワードが間違っています。" );
+    }
+    return $data;
+}
+
+function get_chara_data_path ( $id ) {
+    $chara_path = read_config_option( 'chara_path' );
+    $chara_ext = read_config_option( 'chara_ext' );
+    $chara_file = cat_file( $chara_path, $id. '.'. $chara_ext );
+    return $chara_file;
+}
+
+/**
+ * @param array $data
+ * @return string
+ */
+function convert_convert_chara_data_array2scalar( $data ) {
+    $text = implode( "<>", array(
+            $data['id'], $data['pass'], $data['site'],
+            $data['url'], $data['name'], $data['sex'],
+            $data['chara'], $data['n_0'], $data['n_1'],
+            $data['n_2'], $data['n_3'], $data['n_4'],
+            $data['n_5'], $data['n_6'], $data['syoku'],
+            $data['hp'], $data['maxhp'], $data['ex'],
+            $data['lv'], $data['gold'], $data['lp'],
+            $data['total'], $data['kati'], $data['waza'],
+            $data['item'], $data['mons'], $data['host'],
+            $data['date'], '' )
+    );
+    return $text;
+}
+
+function convert_convert_chara_data_scalar2array( $text ) {
+    $tmp = explode( "<>", $text );
+    $data['id'] = $tmp[0];
+    $data['pass'] = $tmp[1];
+    $data['site'] = $tmp[2];
+    $data['url'] = $tmp[3];
+    $data['name'] = $tmp[4];
+    $data['sex'] = $tmp[5];
+    $data['chara'] = $tmp[6];
+    $data['n_0'] = $tmp[7];
+    $data['n_1'] = $tmp[8];
+    $data['n_2'] = $tmp[9];
+    $data['n_3'] = $tmp[10];
+    $data['n_4'] = $tmp[11];
+    $data['n_5'] = $tmp[12];
+    $data['n_6'] = $tmp[13];
+    $data['syoku'] = $tmp[14];
+    $data['hp'] = $tmp[15];
+    $data['maxhp'] = $tmp[16];
+    $data['ex'] = $tmp[17];
+    $data['lv'] = $tmp[18];
+    $data['gold'] = $tmp[19];
+    $data['lp'] = $tmp[20];
+    $data['total'] = $tmp[21];
+    $data['kati'] = $tmp[22];
+    $data['waza'] = $tmp[23];
+    $data['item'] = $tmp[24];
+    $data['mons'] = $tmp[25];
+    $data['host'] = $tmp[26];
+    $data['date'] = $tmp[27];
     return $data;
 }
