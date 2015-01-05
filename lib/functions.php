@@ -132,18 +132,6 @@ function decode_param() {
     return $IN;
 }
 
-function cat_file() {
-    $args = func_get_args();
-    $path = implode( DIRECTORY_SEPARATOR, $args );
-    return $path;
-}
-
-function cat_dir() {
-    $args = func_get_args();
-    $path = implode( DIRECTORY_SEPARATOR, $args );
-    return $path;
-}
-
 /**
  * キャラクターの重複チェック
  * 

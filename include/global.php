@@ -82,3 +82,26 @@ foreach ( $names_array as $key ) {
     $config[ $key ] = $GLOBALS[ $key ];
 }
 
+function cat_file() {
+    $args = func_get_args();
+    $path = implode( DIRECTORY_SEPARATOR, $args );
+    return $path;
+}
+
+function cat_dir() {
+    $args = func_get_args();
+    $path = implode( DIRECTORY_SEPARATOR, $args );
+    return $path;
+}
+
+function autoload_ffadv_lib() {
+    $libdir = cat_dir( dirname( __FILE__ ), "..", "lib" );
+    $dirs = scandir( $libdir );
+    foreach ( $dirs as $filename ) {
+        if ( preg_match( "/.php$/", $filename ) ) {
+            require_once cat_file( $libdir, $filename );
+        }
+    }
+}
+
+autoload_ffadv_lib();

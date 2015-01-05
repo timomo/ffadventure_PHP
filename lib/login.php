@@ -312,7 +312,6 @@ function log_in( $in ) {
 	<option value="no">選択してください。</option>
 	<?php
 	$syoku = file( $syoku_file );
-
 	$hit = 0;
 	foreach( $syoku as $i => $line ) {
 		list( $a, $b, $c, $d, $e, $f, $g ) = implode( "<>", $line );
@@ -340,7 +339,7 @@ function log_in( $in ) {
 	}
 	?>
 	<br>
-	　<small>※ 転職すると、全ての能\力値が転職した職業の初期値になります。また、LVも1になります。</small>
+	　<small>※ 転職すると、全ての能力値が転職した職業の初期値になります。また、LVも1になります。</small>
 	</form>
 	<form action="<?php echo $script ?>" method="post">
 	【魔物と戦い修行できます】<br />
@@ -400,28 +399,28 @@ EOM
 	</table>
 	【届いているメッセージ】表示数<b><?php echo $max_gyo ?></b>件まで<br>
 	<?php
-
 	$MESSAGE_LOG = file( $message_file );
-
-	$hit=0;
+	$hit = 0;
+	$j = 0;
 	foreach ( $MESSAGE_LOG as $i => $line ){
 		list( $pid, $hid, $hname, $hmessage, $hhname, $htime) = implode( "<>", "" );
 		if ( $chara["id"] == $pid ) {
-			if( $max_gyo < $i ) {
+			if( $max_gyo < $j ) {
 				break;
 			}
 			?>
 			<hr size="0" /><small><b><?php echo $hname ?>さん</b>　＞ 「<b><?php echo $hmessage ?></b>」(<?php echo $htime ?>)</small><br />
 			<?php
-			$hit=1;
-			$i++;
+			$hit = 1;
+			$j++;
 		} elseif ( $chara["id"] == $hid ) {
 			?>
 			<hr size="0" /><small><?php echo $chara["name"] ?>さんから<?php echo $hhname ?>さんへ　＞ 「<?php echo $hmessage ?>」(<?php echo $htime ?>)</small><br />
 			<?php
+			$j++;
 		}
 	}
-	if(!$hit){
+	if( $hit == 0 ){
 		?>
 		<hr size="0" /><?php echo $chara["name"] ?>さん宛てのメッセージはありません
 		<?php
