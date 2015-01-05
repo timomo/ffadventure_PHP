@@ -11,6 +11,7 @@ function battle_monster( $in ) {
     $max_turn = read_config_option( "turn" );
     $chara_syoku = read_config_option( "chara_syoku" );
     $lv_up = read_config_option( "lv_up" );
+    $script = read_config_option( "script" );
     
     if ( $chara["stamina"] == 0 ) {
         $stamina_time = read_config_option( 'stamina_time' );
@@ -241,6 +242,15 @@ EOF;
     }
 
     save_chara_data( $chara );
+
+    ?>
+    <form action="<?php echo $script ?>" method="post">
+        <input type="hidden" name="mode" value="log_in" />
+        <input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+        <input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
+        <input type="submit" value="ステータス画面へ" />
+    </form>
+    <?php
     
     show_footer();
 }

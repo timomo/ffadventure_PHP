@@ -160,7 +160,6 @@ function log_in( $in ) {
 	$chara_syoku = read_config_option( 'chara_syoku' );
 	$max_gyo = read_config_option( 'max_gyo' );
 	$syoku_file = read_config_option( 'syoku_file' );
-	$yado_dai = read_config_option( 'yado_dai' );
 	$message_file = read_config_option( 'message_file' );
 
     // TODO: ファイルロック
@@ -362,10 +361,7 @@ function log_in( $in ) {
 		<?php echo $mtime ?>秒後闘えるようになります。<br />
 		<?php
 	}
-	$yado_gold = $yado_dai * $chara["lv"];
-	if ( $chara["gold"] <= $yado_dai ) {
-		$yado_gold = $chara["gold"];
-	}
+	$yado_gold = calc_yado_daikin( $chara );
 	?>
 	　<small>※修行の旅にいけます。</small>
 	</form>
