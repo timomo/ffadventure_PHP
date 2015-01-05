@@ -9,9 +9,10 @@
 function read_stamina( &$data ) {
     $stamina_path = read_config_option( 'stamina_path' );
     $stamina_ext = read_config_option( 'stamina_ext' );
+    $stamina_max = read_config_option( 'stamina_max' );
     $path = cat_file( $stamina_path, $data["id"]. '.'. $stamina_ext );
-    $data["stamina"] = 10;
-    $data["maxstamina"] = 10;
+    $data["stamina"] = $stamina_max;
+    $data["maxstamina"] = $stamina_max;
     $data["staminadate"] = time();
     
     if ( file_exists( $path ) == false ) {
@@ -31,9 +32,10 @@ function read_stamina( &$data ) {
 function read_battlepoint( &$data ) {
     $battlepoint_path = read_config_option( 'battlepoint_path' );
     $battlepoint_ext = read_config_option( 'battlepoint_ext' );
+    $battlepoint_max = read_config_option( 'battlepoint_max' );
     $path = cat_file( $battlepoint_path, $data["id"]. '.'. $battlepoint_ext );
-    $data["battlepoint"] = 10;
-    $data["maxbattlepoint"] = 10;
+    $data["battlepoint"] = $battlepoint_max;
+    $data["maxbattlepoint"] = $battlepoint_max;
     $data["battlepointdate"] = time();
 
     if ( file_exists( $path ) == false ) {

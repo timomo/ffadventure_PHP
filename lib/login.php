@@ -240,7 +240,7 @@ function log_in( $in ) {
 	<td colspan="5" class="b2" align="center">キャラクターデータ</td>
 	</tr>
 	<tr>
-	<td rowspan="8" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $chara["chara"] ] ?>"><br>武器：<?php echo $i_name ?></td>
+	<td rowspan="9" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $chara["chara"] ] ?>"><br>武器：<?php echo $i_name ?></td>
 	<td class="b1">なまえ</td>
 	<td><input type="text" name="c_name" value="<?php echo $chara["name"] ?>" size="10" /></td>
 	<td class="b1">性別</td>
