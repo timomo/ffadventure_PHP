@@ -95,7 +95,7 @@ function set_command_map() {
         'regist' => 'regist',
         'battle' => 'battle',
         'tensyoku' => 'tensyoku',
-        'monster' => 'monster',
+        'monster' => 'battle_monster',
         'ranking' => 'ranking',
         'yado' => 'yado',
         'message' => 'message',
