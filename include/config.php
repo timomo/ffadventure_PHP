@@ -235,16 +235,28 @@ $m_time = 600;
  * @var array
  */
 $chara_name = array();
-$chara_name[0] = 'チョコボ';
-$chara_name[1] = 'エーコ';
-$chara_name[2] = 'フライヤ';
-$chara_name[3] = 'ガーネット';
-$chara_name[4] = 'モーグリ';
-$chara_name[5] = 'クイナ';
-$chara_name[6] = 'サラマンダー';
-$chara_name[7] = 'スタイナー';
-$chara_name[8] = 'ビビ';
-$chara_name[9] = 'ジタン';
+$chara_name[0] = 'たまねぎ剣士';
+$chara_name[1] = '戦士';
+$chara_name[2] = 'モンク';
+$chara_name[3] = '白魔道師';
+$chara_name[4] = '黒魔道師';
+$chara_name[5] = '赤魔道師';
+$chara_name[6] = '狩人';
+$chara_name[7] = 'ナイト';
+$chara_name[8] = 'シーフ';
+$chara_name[9] = '学者';
+$chara_name[10] = '風水師';
+$chara_name[11] = '竜騎士';
+$chara_name[12] = 'バイキング';
+$chara_name[13] = '空手家';
+$chara_name[14] = '魔剣士';
+$chara_name[15] = '幻術師';
+$chara_name[16] = '吟遊詩人';
+$chara_name[17] = '魔人';
+$chara_name[18] = '導師';
+$chara_name[19] = '魔界幻士';
+$chara_name[20] = '賢者';
+$chara_name[21] = '忍者';
 
 /**
  * キャラクター画像ファイル名
@@ -252,16 +264,28 @@ $chara_name[9] = 'ジタン';
  * @var array
  */
 $chara_img = array();
-$chara_img[0] = 'ikon_m_c.gif';
-$chara_img[1] = 'ikon_m_e.gif';
-$chara_img[2] = 'ikon_m_f.gif';
-$chara_img[3] = 'ikon_m_g.gif';
-$chara_img[4] = 'ikon_m_m.gif';
-$chara_img[5] = 'ikon_m_q.gif';
-$chara_img[6] = 'ikon_m_sa.gif';
-$chara_img[7] = 'ikon_m_st.gif';
-$chara_img[8] = 'ikon_m_v.gif';
-$chara_img[9] = 'ikon_m_z.gif';
+$chara_img[0] = 'ff3onion.gif';
+$chara_img[1] = 'ff3war.gif';
+$chara_img[2] = 'ff3monk.gif';
+$chara_img[3] = 'ff3wht.gif';
+$chara_img[4] = 'ff3blk.gif';
+$chara_img[5] = 'ff3red.gif';
+$chara_img[6] = 'ff3rng.gif';
+$chara_img[7] = 'ff3pld.gif';
+$chara_img[8] = 'ff3shf.gif';
+$chara_img[9] = 'ff3gks.gif';
+$chara_img[10] = 'ff3fsi.gif';
+$chara_img[11] = 'ff3drg.gif';
+$chara_img[12] = 'ff3bkg.gif';
+$chara_img[13] = 'ff3krt.gif';
+$chara_img[14] = 'ff3drk.gif';
+$chara_img[15] = 'ff3gjt.gif';
+$chara_img[16] = 'ff3brd.gif';
+$chara_img[17] = 'ff3mjn.gif';
+$chara_img[18] = 'ff3dsi.gif';
+$chara_img[19] = 'ff3mkg.gif';
+$chara_img[20] = 'ff3ken.gif';
+$chara_img[21] = 'ff3nin.gif';
 
 /**
  * キャラクターの職業
