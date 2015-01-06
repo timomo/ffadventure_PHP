@@ -365,6 +365,21 @@ function chara_regist_new( $in ) {
     return $data;
 }
 
+function load_all_chara_data() {
+    $chara_path = read_config_option( "chara_path" );
+    $chara_ext = read_config_option( "chara_ext" );
+    $charas = scandir( $chara_path );
+    $ret = array();
+    foreach ( $charas as $filename ) {
+        if ( preg_match( "/(.+?).$chara_ext$/", $filename, $matches ) == false ) {
+            continue;
+        }
+        $chara_data = load_chara_data( $matches[1] );
+        $ret[ $chara_data["id"] ] = $chara_data;
+    }
+    return $ret;
+}
+
 function load_chara_data( $id ) {
     $chara_data = get_chara_data_path( $id );
     if ( file_exists( $chara_data ) == false ) {

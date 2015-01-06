@@ -161,6 +161,7 @@ function log_in( $in ) {
 	$max_gyo = read_config_option( 'max_gyo' );
 	$syoku_file = read_config_option( 'syoku_file' );
 	$message_file = read_config_option( 'message_file' );
+	$charas = load_all_chara_data();
 
     // TODO: ファイルロック
 	$chara = login_chara_data( $in );
@@ -289,24 +290,6 @@ function log_in( $in ) {
 	<td class="b1">技発動時コメント</td>
 	<td colspan="4"><input type="text" name="waza" value="<?php echo $chara["waza"] ?>" size="50" /></td>
 	</tr>
-	<tr>
-	<td colspan="5" align="center">
-	<input type="hidden" name="mode" value="battle" />
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
-	<?php
-	if ( $ltime >= $b_time or !$chara["total"] ) {
-	?>
-	<input type="submit" value="チャンプに挑戦" />
-	<?php
-	} else {
-	?>
-	<?php echo $vtime ?>秒後闘えるようになります。
-	<?php
-	}
-	?>
-	</td>
-	</tr>
 	</table>
 	</form>
 	</td>
@@ -373,24 +356,43 @@ function log_in( $in ) {
 	<input type="submit" value="体力を回復" /><br />
 	　<small>※体力を回復することができます。<b><?php echo $yado_gold ?></b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
 	</form>
+	
+	<form action="<?php echo $script ?>" method="post">
+	【チャンプに挑戦】<br />
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
+	<input type="hidden" name="mode" value="battle" />
+	<?php
+	if ( $ltime >= $b_time || ! $chara["total"] ) {
+		?>
+		<input type="submit" value="チャンプに挑戦" /><br />
+		<?php
+	} else {
+		?>
+		<?php echo $vtime ?>秒後闘えるようになります。
+		<?php
+	}
+	?>
+	　<small>※チャンプに挑戦することができます。</small>
+	</form>
+	
 	<form action="<?php echo $script ?>" method="post">
 	【他のキャラクターへメッセージを送る】<br />
 	<input type="text" name="mes" size="50"><br />
 	<select name="mesid">
 	<option value="">送る相手を選択</option>
-EOM
+	<?php
 
-	open(IN,"$chara_file");
-	@MESSAGE = <IN>;
-	close(IN);
-
-	foreach(@MESSAGE) {
-		($did,$dpass,$dsite,$durl,$dname) = split(/<>/);
-		if($kid eq $did) { next; }
-		print "<option value=$did>$dnameさんへ\n";
+	foreach ( $charas as $id => $data ) {
+		if ( $chara["id"] == $id ) {
+			continue;
+		}
+		?>
+		<option value="<?php echo $id ?>"><?php echo $chara["name"] ?>さんへ</option>
+		<?php
 	}
 
-	print <<"EOM";
+	?>
 	</select>
 	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
 	<input type="hidden" name="name" value="<?php echo $chara["name"] ?>" />
