@@ -360,7 +360,7 @@ function chara_regist_new( $in ) {
     $data['n_4'] += $kiso_nouryoku[4];
     $data['n_5'] += $kiso_nouryoku[5];
     $data['n_6'] += $kiso_nouryoku[6];
-    $text = convert_convert_chara_data_array2scalar( $data );
+    $text = convert_chara_data_array2scalar( $data );
     file_put_contents( $chara_file, $text );
     return $data;
 }
@@ -386,7 +386,19 @@ function load_chara_data( $id ) {
         return null;
     }
     $text = file_get_contents( $chara_data );
-    $data = convert_convert_chara_data_scalar2array( $text );
+    $data = convert_chara_data_scalar2array( $text );
+    return $data;
+}
+
+function load_winner_data( $path = "" ) {
+    if ( $path == "" ) {
+        $path = read_config_option( "winner_file" );
+    }
+    if ( file_exists( $path ) == false ) {
+        return null;
+    }
+    $text = file_get_contents( $path );
+    $data = convert_chara_data_scalar2array( $text );
     return $data;
 }
 
@@ -405,7 +417,7 @@ function login_chara_data( $in ) {
 }
 
 function save_chara_data( $data ) {
-    $text = convert_convert_chara_data_array2scalar( $data );
+    $text = convert_chara_data_array2scalar( $data );
     $path = get_chara_data_path( $data["id"] );
     file_put_contents( $path, $text );
     if ( array_key_exists( "stamina", $data ) ) {
@@ -427,7 +439,7 @@ function get_chara_data_path ( $id ) {
  * @param array $data
  * @return string
  */
-function convert_convert_chara_data_array2scalar( $data ) {
+function convert_chara_data_array2scalar( $data ) {
     $text = implode( "<>", array(
             $data['id'], $data['pass'], $data['site'],
             $data['url'], $data['name'], $data['sex'],
@@ -443,8 +455,13 @@ function convert_convert_chara_data_array2scalar( $data ) {
     return $text;
 }
 
-function convert_convert_chara_data_scalar2array( $text ) {
+/**
+ * @param $text
+ * @return array
+ */
+function convert_chara_data_scalar2array( $text ) {
     $tmp = explode( "<>", $text );
+    $data = array();
     $data['id'] = $tmp[0];
     $data['pass'] = $tmp[1];
     $data['site'] = $tmp[2];

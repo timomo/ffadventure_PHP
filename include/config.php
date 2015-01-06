@@ -77,21 +77,21 @@ $chara_path = "../data/chara";
  * 
  * @var string
  */
-$chara_ext = "ini";
+$chara_ext = "dat";
 
 /**
  * レコード(連勝記録用データファイル)
  * 
  * @var string
  */
-$recode_file= '../data/recode.ini';
+$recode_file= '../data/recode.dat';
 
 /**
  * 勝利者データ
  * 
  * @var string
  */
-$winner_file= "winner.cgi";
+$winner_file= "../data/winner.dat";
 
 /**
  * メッセージログファイル
@@ -105,23 +105,23 @@ $message_file = "message.cgi";
  * 
  * @var string
  */
-$syoku_file= "../data/syoku.ini";
+$syoku_file= "../data/syoku.dat";
 
 /**
  * モンスターデータファイル
- * monster.iniにデータを追加することでモンスターをいくらでも増やすことができます
+ * monster.datにデータを追加することでモンスターをいくらでも増やすことができます
  * 名前<>経験値<>ランダム値<>基本HP<>ダメージ(ランダム)<>改行
  * 
  * @var string
  */
-$monster_file= "../data/monster.ini";
+$monster_file= "../data/monster.dat";
 
 /**
  * アイテムデータファイル
  * 
  * @var string
  */
-$item_file = "../data/item.ini";
+$item_file = "../data/item.dat";
 
 /**
  * 各職業に必要なパラメータ説明ページ
@@ -602,12 +602,12 @@ $max = 100;
 $max_gyo = 5;
 
 $stamina_path = "../data/stamina";
-$stamina_ext = "ini";
+$stamina_ext = "dat";
 $stamina_max = 10;
 $stamina_time = 60 * 3;
 
 $battlepoint_path = "../data/battlepoint";
-$battlepoint_ext = "ini";
+$battlepoint_ext = "dat";
 $battlepoint_max = 3;
 $battlepoint_time = 60 * 20;
 

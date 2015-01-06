@@ -23,9 +23,11 @@ function html_top() {
     $img_path = read_config_option( 'img_path' );
     $chara_img = read_config_option( 'chara_img' );
     $mark = read_config_option( 'mark' );
-    $limit = read_config_option( '$limit' );
-    $b_time = read_config_option( '$b_time' );
-    $wchara = 0;
+    $limit = read_config_option( 'limit' );
+    $b_time = read_config_option( 'b_time' );
+	$winner  = load_winner_data();
+	$chara_syoku = read_config_option( "chara_syoku" );
+	$witem = load_item_data( $winner["item"] );
     
     if ( isset( $record[0] ) ) {
         list( $rcount, $rname, $rsite, $rurl ) = @explode( '<>', $record[0] );
@@ -70,13 +72,13 @@ function html_top() {
         <td width="500" valign="top">
 	        <table border=1 width="100%">
 	            <tr>
-	                <td colspan=5 align="center" class="b2"><span color="#FFFFFF"><?php echo $wcount ?>連勝中</span></td>
+	                <td colspan=5 align="center" class="b2"><span color="#FFFFFF"><?php echo $winner["count"] ?>連勝中</span></td>
                 </tr>
 	            <tr>
 	                <td align="center" class="b1">ホームページ</td>
-	                <td colspan="4"><a href="<?php echo $wurl ?>"><b><?php echo $wsite ?></b></a>
+	                <td colspan="4"><a href="<?php echo $winner["url"] ?>"><b><?php echo $winner["site"] ?></b></a>
     <?php
-	if( $rurl == $wurl ) {
+	if( $rurl == $winner["url"] ) {
     ?>
                     <img src="<?php echo $img_path ?>/<?php echo $mark ?>" border="0">
     <?php
@@ -85,37 +87,37 @@ function html_top() {
 	</td>
 	</tr>
 	<tr>
-	<td align="center" rowspan="8"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $wchara ] ?>"><p>勝率：<?php echo $ritu ?>%<br />武器：<?php echo $wi_name ?></td>
-	<td align="center" class="b1">なまえ</td><td><b><?php echo $wname ?></b></td>
+	<td align="center" rowspan="8"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $winner["chara"] ] ?>"><p>勝率：<?php echo $ritu ?>%<br />武器：<?php echo $witem["name"] ?></td>
+	<td align="center" class="b1">なまえ</td><td><b><?php echo $winner["name"] ?></b></td>
 	<td align="center" class="b1">性別</td><td><b><?php echo $esex ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">職業</td><td><b><?php echo $chara_syoku[ $wsyoku ] ?></b></td>
+	<td align="center" class="b1">職業</td><td><b><?php echo $chara_syoku[ $winner["syoku"] ] ?></b></td>
 	<td align="center" class="b1">クラス</td><td><b><?php echo $class ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">レベル</td><td><b><?php echo $wlv ?></b></td>
-	<td align="center" class="b1">経験値</td><td><b><?php echo $wex ?>/<?php echo $next_ex ?></b></td>
+	<td align="center" class="b1">レベル</td><td><b><?php echo $winner["lv"] ?></b></td>
+	<td align="center" class="b1">経験値</td><td><b><?php echo $winner["ex"] ?>/<?php echo $next_ex ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">お金</td><td><b><?php echo $wgold ?></b></td>
-	<td align="center" class="b1">HP</td><td><b><?php echo $whp ?>/<?php echo $wmaxhp ?></b></td>
+	<td align="center" class="b1">お金</td><td><b><?php echo $winner["gold"] ?></b></td>
+	<td align="center" class="b1">HP</td><td><b><?php echo $winner["hp"] ?>/<?php echo $winner["maxhp"] ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">力</td><td><b><?php echo $wn_0 ?></b></td>
-	<td align="center" class="b1">知能</td><td><b><?php echo $wn_1 ?></b></td>
+	<td align="center" class="b1">力</td><td><b><?php echo $winner["n_0"] ?></b></td>
+	<td align="center" class="b1">知能</td><td><b><?php echo $winner["n_1"] ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">信仰心</td><td><b><?php echo $wn_2 ?></b></td>
-	<td align="center" class="b1">生命力</td><td><b><?php echo $wn_3 ?></b></td>
+	<td align="center" class="b1">信仰心</td><td><b><?php echo $winner["n_2"] ?></b></td>
+	<td align="center" class="b1">生命力</td><td><b><?php echo $winner["n_3"] ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">器用さ</td><td><b><?php echo $wn_4 ?></b></td>
-	<td align="center" class="b1">速さ</td><td><b><?php echo $wn_5 ?></b></td>
+	<td align="center" class="b1">器用さ</td><td><b><?php echo $winner["n_4"] ?></b></td>
+	<td align="center" class="b1">速さ</td><td><b><?php echo $winner["n_5"] ?></b></td>
 	</tr>
 	<tr>
-	<td align="center" class="b1">魅力</td><td><b><?php echo $wn_6 ?></b></td>
-	<td align="center" class="b1">カルマ</td><td><b><?php echo $wlp ?></b></td>
+	<td align="center" class="b1">魅力</td><td><b><?php echo $winner["n_6"] ?></b></td>
+	<td align="center" class="b1">カルマ</td><td><b><?php echo $winner["lp"] ?></b></td>
 	</tr>
 	<tr>
 	<td colspan=5 align="center">$lname の <a href="<?php echo $lurl ?>" target="_blank"><?php echo $lsite ?></a> に勝利！！</td>
