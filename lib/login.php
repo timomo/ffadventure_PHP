@@ -28,7 +28,20 @@ function html_top() {
 	$winner  = load_winner_data();
 	$chara_syoku = read_config_option( "chara_syoku" );
 	$witem = load_item_data( $winner["item"] );
-    
+	$winner_class = get_class_name( $winner );
+	$esex = get_sex_name( $winner );
+	$next_ex = get_next_ex( $winner );
+	// TODO: lsite
+	$lsite = "";
+	$lname = "";
+	$lurl = "";
+	
+	if ( $winner["kati"] ) {
+		$ritu = ( $winner["kati"] / $winner["total"] ) * 100;
+	} else {
+		$ritu = 0;
+	}
+	
     if ( isset( $record[0] ) ) {
         list( $rcount, $rname, $rsite, $rurl ) = @explode( '<>', $record[0] );
     } else {
@@ -66,7 +79,7 @@ function html_top() {
     <br />
     <?php echo $kanri_message ?>
 <p>
-    現在の連勝記録は、<?php echo $rname ?>さんの「<a href="<?php echo $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 3"><?php echo $rsite ?></span></a>」、<?php echo $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="<?php echo $img_path ?>/<?php echo $mark ?>" />マークがつきます。
+    現在の連勝記録は、<?php echo $rname ?>さんの「<a href="<?php echo $rurl ?>" target="_blan"><span style="color:#6666BB; font-size: 10pt"><?php echo $rsite ?></span></a>」、<?php echo $rcount ?>連勝です。新記録を出したサイト名の横には、<img src="<?php echo $img_path ?>/<?php echo $mark ?>" />マークがつきます。
 <table border="0" width="100%">
     <tr>
         <td width="500" valign="top">
@@ -93,7 +106,7 @@ function html_top() {
 	</tr>
 	<tr>
 	<td align="center" class="b1">職業</td><td><b><?php echo $chara_syoku[ $winner["syoku"] ] ?></b></td>
-	<td align="center" class="b1">クラス</td><td><b><?php echo $class ?></b></td>
+	<td align="center" class="b1">クラス</td><td><b><?php echo $winner_class ?></b></td>
 	</tr>
 	<tr>
 	<td align="center" class="b1">レベル</td><td><b><?php echo $winner["lv"] ?></b></td>
@@ -120,7 +133,7 @@ function html_top() {
 	<td align="center" class="b1">カルマ</td><td><b><?php echo $winner["lp"] ?></b></td>
 	</tr>
 	<tr>
-	<td colspan=5 align="center">$lname の <a href="<?php echo $lurl ?>" target="_blank"><?php echo $lsite ?></a> に勝利！！</td>
+	<td colspan=5 align="center"><?php echo $lname ?> の <a href="<?php echo $lurl ?>" target="_blank"><?php echo $lsite ?></a> に勝利！！</td>
 	</tr>
 	</table>
 </td>

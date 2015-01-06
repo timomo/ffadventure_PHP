@@ -492,3 +492,261 @@ function convert_chara_data_scalar2array( $text ) {
     $data['date'] = $tmp[27];
     return $data;
 }
+
+function get_next_ex( $data ) {
+    $lv_up = read_config_option( "lv_up" );
+    $next_ex = $data["lv"] * $lv_up;
+    return $next_ex;
+}
+
+function get_sex_name( $data ) {
+    if ( $data["sex"] == 1 ) {
+        return '男';
+    }
+    return '女';
+}
+
+function get_class_name( $data ) {
+    $class = "";
+    $FIGHTER = read_config_option( "FIGHTER" );
+    $MAGE = read_config_option( "MAGE" );
+    $PRIEST = read_config_option( "PRIEST" );
+    $THIEF = read_config_option( "THIEF" );
+    $RANGER = read_config_option( "RANGER" );
+    $ALCHEMIST = read_config_option( "ALCHEMIST" );
+    $BARD = read_config_option( "BARD" );
+    $PSIONIC = read_config_option( "PSIONIC" );
+    $VALKYRIE = read_config_option( "VALKYRIE" );
+    $BISHOP = read_config_option( "BISHOP" );
+    $LORD = read_config_option( "LORD" );
+    $SAMURAI = read_config_option( "SAMURAI" );
+    $MONK = read_config_option( "MONK" );
+    $NINJA = read_config_option( "NINJA" );
+    
+    if ( $data["syoku"] == 0 ) {
+        if ( $data["lv"] > 42 ) {
+            $class = $FIGHTER[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $FIGHTER[0];
+        } elseif ( $data["lv"] < 14 ) {
+            $class = $FIGHTER[1];
+        } elseif ( $data["lv"] < 21 ) {
+            $class = $FIGHTER[2];
+        } elseif ( $data["lv"] < 28 ) {
+            $class = $FIGHTER[3];
+        } elseif ( $data["lv"] < 35 ) {
+            $class = $FIGHTER[4];
+        } elseif ( $data["lv"] < 42 ) {
+            $class = $FIGHTER[5];
+        }
+    } elseif ( $data["syoku"] == 1 ) {
+		if ( $data["lv"] > 42 ) {
+            $class = $MAGE[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $MAGE[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $MAGE[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $MAGE[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $MAGE[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $MAGE[4];
+		} elseif ( $data["lv"] < 42 ) {  
+            $class = $MAGE[5];
+		}
+	} elseif ( $data["syoku"] == 2 ) {
+		if ( $data["lv"] > 42 ) {
+            $class = $PRIEST[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $PRIEST[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $PRIEST[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $PRIEST[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $PRIEST[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $PRIEST[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $PRIEST[5];
+		}
+	} elseif ( $data["syoku"] == 3 ) {
+		if ( $data["lv"] > 42 ) {
+            $class = $THIEF[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $THIEF[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $THIEF[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $THIEF[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $THIEF[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $THIEF[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $THIEF[5];
+		}
+	} elseif ( $data["syoku"] == 4 ) {
+		if ( $data["lv"] > 42) {
+            $class = $RANGER[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $RANGER[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $RANGER[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $RANGER[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $RANGER[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $RANGER[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $RANGER[5];
+		}
+	} elseif ( $data["syoku"] == 5 ) {
+		if ( $data["lv"] > 42) {
+            $class = $ALCHEMIST[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $ALCHEMIST[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $ALCHEMIST[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $ALCHEMIST[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $ALCHEMIST[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $ALCHEMIST[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $ALCHEMIST[5];
+		}
+	} elseif ( $data["syoku"] == 6 ) {
+		if ( $data["lv"] > 42) {
+            $class = $BARD[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $BARD[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $BARD[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $BARD[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $BARD[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $BARD[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $BARD[5];
+		}
+	} elseif ( $data["syoku"] == 7 ) {
+		if ( $data["lv"] > 42) {
+            $class = $PSIONIC[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $PSIONIC[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $PSIONIC[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $PSIONIC[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $PSIONIC[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $PSIONIC[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $PSIONIC[5];
+		}
+	} elseif ( $data["syoku"] == 8 ) {
+		if( $data["lv"] > 42) {
+            $class = $VALKYRIE[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $VALKYRIE[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $VALKYRIE[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $VALKYRIE[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $VALKYRIE[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $VALKYRIE[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $VALKYRIE[5];
+		}
+	} elseif ( $data["syoku"] == 9 ) {
+		if ( $data["lv"] > 42) {
+            $class = $BISHOP[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $BISHOP[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $BISHOP[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $BISHOP[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $BISHOP[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $BISHOP[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $BISHOP[5];
+		}
+	} elseif ( $data["syoku"] == 10 ) {
+		if( $data["lv"] > 42) {
+            $class = $LORD[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $LORD[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $LORD[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $LORD[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $LORD[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $LORD[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $LORD[5];
+		}
+	} elseif ( $data["syoku"] == 11 ) {
+		if ( $data["lv"] > 42) {
+            $class = $SAMURAI[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $SAMURAI[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $SAMURAI[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $SAMURAI[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $SAMURAI[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $SAMURAI[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $SAMURAI[5];
+		}
+	} elseif ( $data["syoku"] == 12 ) {
+		if($data["lv"] > 42) {
+            $class = $MONK[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $MONK[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $MONK[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $MONK[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $MONK[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $MONK[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $MONK[5];
+		}
+	} elseif ( $data["syoku"] == 13 ) {
+		if ( $data["lv"] > 42) {
+            $class = $NINJA[6];
+        } elseif ( $data["lv"] < 7 ) {
+            $class = $NINJA[0];
+		} elseif ( $data["lv"] < 14 ) {
+            $class = $NINJA[1];
+		} elseif ( $data["lv"] < 21 ) {
+            $class = $NINJA[2];
+		} elseif ( $data["lv"] < 28 ) {
+            $class = $NINJA[3];
+		} elseif ( $data["lv"] < 35 ) {
+            $class = $NINJA[4];
+		} elseif ( $data["lv"] < 42 ) {
+            $class = $NINJA[5];
+		}
+	}
+    return $class;
+}
