@@ -9,5 +9,5 @@
 require_once '../include/global.php';
 
 $IN = decode_param();
-var_dump( $IN );
+// var_dump( $IN );
 forward( $IN );
