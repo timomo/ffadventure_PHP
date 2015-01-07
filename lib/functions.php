@@ -93,7 +93,7 @@ function set_command_map() {
         'chara_make' => 'chara_make',
         'make_end' => 'chara_make_end',
         'regist' => 'regist',
-        'battle' => 'battle',
+        'battle' => 'battle_duel',
         'tensyoku' => 'tensyoku',
         'monster' => 'battle_monster',
         'ranking' => 'ranking',
