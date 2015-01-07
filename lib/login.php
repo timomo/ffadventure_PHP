@@ -186,12 +186,9 @@ function log_in( $in ) {
 	$vtime = $b_time - $ltime;
 	$mtime = $m_time - $ltime;
 	
-	if ( $chara["sex"] == 1 ) {
-		$esex = '男';
-	} else {
-		$esex = '女';
-	}
-	$next_ex = $chara["lv"] * $lv_up;
+	$esex = get_sex_name( $chara );
+	$next_ex = get_next_ex( $chara );
+	$class_name = get_class_name( $chara );
 
 	/**
 
@@ -258,7 +255,7 @@ function log_in( $in ) {
 	<td class="b1">職業</td>
 	<td><?php echo $chara_syoku[ $chara["syoku"] ] ?></td>
 	<td class="b1">クラス</td>
-	<td><?php echo $class ?></td>
+	<td><?php echo $class_name ?></td>
 	</tr>
 	<tr>
 	<td class="b1">レベル</td>
