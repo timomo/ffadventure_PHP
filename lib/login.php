@@ -133,7 +133,7 @@ function html_top() {
 	<td align="center" class="b1">カルマ</td><td><b><?php echo $winner["lp"] ?></b></td>
 	</tr>
 	<tr>
-	<td colspan=5 align="center"><?php echo $lname ?> の <a href="<?php echo $lurl ?>" target="_blank"><?php echo $lsite ?></a> に勝利！！</td>
+	<td colspan=5 align="center"><?php echo $winner["l_name"] ?> の <a href="<?php echo $winner["l_url"] ?>" target="_blank"><?php echo $winner["l_site"] ?></a> に勝利！！</td>
 	</tr>
 	</table>
 </td>
