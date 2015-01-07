@@ -52,30 +52,45 @@ function html_top() {
 
     ?>
 <form action="<?php echo $script ?>" method="post">
-<input type="hidden" name="mode" value="log_in" />
-<table border="0" width="100%">
-<tr>
-<td><img src="<?php echo $img_path ?>/<?php echo $title_img ?>"></td>
-<td align="right" valign="top">
-	<table border=1>
-	<tr>
-	<td align=center colspan=5 class=b2>キャラクターを作成済みの方はこちらから</td>
-	</tr>
-	<tr>
-	<td class=b1>I D</td>
-	<td><input type="text" size="10" name="id" value="<?php echo $c_id ?>"></td>
-	<td class=b1>パスワード</td>
-	<td><input type="password" size="10" name="pass" value="<?php echo $c_pass ?>"></td>
-	<td><input type="submit" value="ログイン"></td>
-	</tr>
+	<input type="hidden" name="mode" value="log_in" />
+	<table border="0" width="100%">
+		<tr>
+			<td>
+				<img src="<?php echo $img_path ?>/<?php echo $title_img ?>" />
+			</td>
+			<td align="right" valign="top">
+				<table border="1">
+					<tr>
+						<td align="center" colspan="5" class="b2">
+							キャラクターを作成済みの方はこちらから
+						</td>
+					</tr>
+					<tr>
+						<td class="b1">
+							I D
+						</td>
+						<td>
+							<input type="text" size="10" name="id" value="<?php echo $c_id ?>" />
+						</td>
+						<td class="b1">
+							パスワード
+						</td>
+						<td>
+							<input type="password" size="10" name="pass" value="<?php echo $c_pass ?>" />
+						</td>
+						<td>
+							<input type="submit" value="ログイン" />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
 	</table>
-</td>
-</tr>
-</table>
-<hr size="0">
-<small>
-/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="https://github.com/timomo/ffadventure_PHP/issues">アイデア募集</a> /
-</form>
+	<hr size="0">
+	<small>
+	/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="https://github.com/timomo/ffadventure_PHP/issues">アイデア募集</a> /
+	</small>
+	</form>
     <br />
     <?php echo $kanri_message ?>
 <p>

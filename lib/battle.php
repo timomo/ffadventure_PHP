@@ -57,7 +57,7 @@ function battle_duel( $in ) {
 
         if (rand(0, 20) == 0) {
             $clit1 = <<<EOF
-            <font size="5">{$chara["name"]}「<b>{$chara["waza"]}</b>」</font><p><b class="clit">クリティカル！！</b>
+            <span>{$chara["name"]}「<b>{$chara["waza"]}</b>」</span><p><b class="clit">クリティカル！！</b>
 EOF;
             $dmg1 = $dmg1 * 2;
         }

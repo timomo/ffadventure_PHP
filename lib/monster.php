@@ -56,12 +56,12 @@ function battle_monster( $in ) {
         
         $calc = get_player_attack_calculation( $chara );
         
-        $com1 = $calc["com"];
+        $com1 += $calc["com"];
         $dmg1 += $calc["dmg"];
         
         if ( rand( 0, 20 ) == 0 ) {
             $clit1 = <<<EOF
-            <font size="5">{$chara["name"]}「<b>{$chara["waza"]}</b>」</font><p><b class="clit">クリティカル！！</b>
+            <span>{$chara["name"]}「<b>{$chara["waza"]}</b>」</span><p><b class="clit">クリティカル！！</b>
 EOF;
             $dmg1 = $dmg1 * 2;
         }
