@@ -26,9 +26,6 @@ function battle_duel( $in ) {
         error_page( "現在チャンプなので闘えません。" );
     }
     
-    $chara_item = load_item_data( $chara["item"] );
-    $winner_item = load_item_data( $winner["item"] );
-    
     $khp_flg = $chara["hp"];
     $whp_flg = $winner["hp"];
     $win_flg = 0;

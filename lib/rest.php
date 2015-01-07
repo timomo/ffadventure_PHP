@@ -10,6 +10,7 @@ function yado( $in ) {
     $chara = login_chara_data( $in );
     $yado_gold = calc_yado_daikin( $chara );
     $script = read_config_option( "script" );
+    $winner = load_winner_data();
     
     if ( $chara["gold"] < $yado_gold ) {
         error_page( "お金が足りません" );
@@ -19,7 +20,12 @@ function yado( $in ) {
     $chara["gold"] -= $yado_gold;
     
     save_chara_data( $chara );
-
+    
+    if ( $winner["id"] == $chara["id"] ) {
+        $winner["hp"] = $winner["maxhp"];
+        save_winner_data( $winner );
+    }
+    
     show_header();
     
     ?>

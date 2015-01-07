@@ -177,6 +177,7 @@ function log_in( $in ) {
 	$syoku_file = read_config_option( 'syoku_file' );
 	$message_file = read_config_option( 'message_file' );
 	$charas = load_all_chara_data();
+	$winner = load_winner_data();
 
     // TODO: ファイルロック
 	$chara = login_chara_data( $in );
@@ -378,13 +379,13 @@ function log_in( $in ) {
 	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="battle" />
 	<?php
-	if ( $ltime >= $b_time || ! $chara["total"] ) {
+	if ( $winner["id"] != $chara["id"] ) {
 		?>
 		<input type="submit" value="チャンプに挑戦" /><br />
 		<?php
 	} else {
 		?>
-		<?php echo $vtime ?>秒後闘えるようになります。
+		現在チャンプの為、戦えません。
 		<?php
 	}
 	?>
