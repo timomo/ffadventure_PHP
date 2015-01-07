@@ -31,10 +31,6 @@ function html_top() {
 	$winner_class = get_class_name( $winner );
 	$esex = get_sex_name( $winner );
 	$next_ex = get_next_ex( $winner );
-	// TODO: lsite
-	$lsite = "";
-	$lname = "";
-	$lurl = "";
 	
 	if ( $winner["kati"] ) {
 		$ritu = ( $winner["kati"] / $winner["total"] ) * 100;
@@ -178,6 +174,7 @@ function log_in( $in ) {
 	$message_file = read_config_option( 'message_file' );
 	$charas = load_all_chara_data();
 	$winner = load_winner_data();
+	$citem = load_item_data( $chara["item"] );
 
     // TODO: ファイルロック
 	$chara = login_chara_data( $in );
@@ -245,7 +242,7 @@ function log_in( $in ) {
 	<td colspan="5" class="b2" align="center">キャラクターデータ</td>
 	</tr>
 	<tr>
-	<td rowspan="9" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $chara["chara"] ] ?>"><br>武器：<?php echo $i_name ?></td>
+	<td rowspan="9" align="center"><img src="<?php echo $img_path ?>/<?php echo $chara_img[ $chara["chara"] ] ?>"><br>武器：<?php echo $citem["name"] ?></td>
 	<td class="b1">なまえ</td>
 	<td><input type="text" name="c_name" value="<?php echo $chara["name"] ?>" size="10" /></td>
 	<td class="b1">性別</td>
