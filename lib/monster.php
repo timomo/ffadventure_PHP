@@ -21,8 +21,8 @@ function battle_monster( $in ) {
     $monster_file = read_config_option( 'monster_file' );
     $monsters = file( $monster_file );
     
-    $r_no = count( $monsters );
-    $r_no = rand( 0, $r_no );
+    $m_no = count( $monsters ) - 1;
+    $r_no = rand( 0, $m_no );
     
     $tmp = explode( "<>", $monsters[ $r_no ] );
     $mob["name"] = $tmp[0];
