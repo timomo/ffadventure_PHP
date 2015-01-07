@@ -99,7 +99,7 @@ function set_command_map() {
         'ranking' => 'ranking',
         'yado' => 'yado',
         'message' => 'message',
-        'item_shop' => 'item_shop',
+        'weapon_shop' => 'weapon_shop',
         'item_buy' => 'item_buy'
     );
 }

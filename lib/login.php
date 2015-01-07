@@ -70,7 +70,7 @@ function html_top() {
 </table>
 <hr size="0">
 <small>
-/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=item_shop">武器屋</a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="https://github.com/timomo/ffadventure_PHP/issues">アイデア募集</a> /
+/ <a href="<?php echo $homepage ?>"><?php echo $home_title ?></a> / <a href="<?php echo $script ?>?mode=ranking">英雄たちの記録</a> / <a href="<?php echo $syoku_html ?>">各職業に必要な特性値</a> / <a href="https://github.com/timomo/ffadventure_PHP/issues">アイデア募集</a> /
 </form>
     <br />
     <?php echo $kanri_message ?>
@@ -365,6 +365,15 @@ function log_in( $in ) {
 	<input type="hidden" name="mode" value="yado" />
 	<input type="submit" value="体力を回復" /><br />
 	　<small>※体力を回復することができます。<b><?php echo $yado_gold ?></b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
+	</form>
+	
+	<form action="<?php echo $script ?>" method="post">
+	【武器屋】<br>
+	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
+	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
+	<input type="hidden" name="mode" value="weapon_shop" />
+	<input type="submit" value="武器屋へ行く" /><br />
+	　<small>※武器を購入する事が出来ます。</small>
 	</form>
 	
 	<form action="<?php echo $script ?>" method="post">
