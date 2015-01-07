@@ -31,6 +31,10 @@ function html_top() {
 	$winner_class = get_class_name( $winner );
 	$esex = get_sex_name( $winner );
 	$next_ex = get_next_ex( $winner );
+	$stamina_time = read_config_option( "stamina_time" );
+	$stamina_max = read_config_option( "stamina_max" );
+	$battlepoint_time = read_config_option( "battlepoint_time" );
+	$battlepoint_max = read_config_option( "battlepoint_max" );
 	
 	if ( $winner["kati"] ) {
 		$ritu = ( $winner["kati"] / $winner["total"] ) * 100;
@@ -143,7 +147,9 @@ function html_top() {
         <li>これは、HPバトラーではなく、キャラバトラーです。キャラクターを育てていくゲームです。</li>
         <li>能力を振り分けることができキャラクターの能力をご自分で決めることができます。(ここで決めた能力はごくまれにしか上昇しないので、慎重に)</li>
         <li><b><?php echo $limit ?>日</b>以上闘わなければ、キャラクターのデータが削除されます。</li>
-        <li>一度戦闘すると<b><?php echo $b_time ?></b>秒経過しないと再び戦闘できません。</li>
+        <li>当ページでは、戦闘は時間制限ではなく、ポイント制限です。</li>
+        <li>チャンプと戦えるバトルポイントは<?php echo $battlepoint_time ?>秒につき、1回復し、最大<?php echo $battlepoint_max ?>ポイントです。</li>
+		<li>モンスターと戦えるスタミナポイントは<?php echo $stamina_time ?>秒につき、1回復し、最大<?php echo $stamina_max ?>ポイントです。</li>
     </ol>
     [<B><span style="color: #FF9933;">新規キャラクタ作成</span></B>]<BR>
     下のボタンを押して、あなたのキャラクターを作成します。
