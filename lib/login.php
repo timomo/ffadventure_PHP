@@ -538,6 +538,7 @@ function session_off() {
  */
 function req($key) {
 	$_REQUEST = array_merge( $_REQUEST, $_COOKIE );
+	var_dump( $_REQUEST );
 	return(isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');
 }
 
