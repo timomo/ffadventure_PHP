@@ -63,7 +63,7 @@ $script = "index.php";
  * 
  * @var string
  */
-$script_url = "http://ffadv.special-thanks.me/index.php";
+$script_url = "http://www.ffa.red/index.php";
 
 /**
  * キャラクターデータパス
