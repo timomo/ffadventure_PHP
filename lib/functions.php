@@ -71,6 +71,17 @@ function forward( $tmp ) {
         set_command_map();
     }
 
+    // 処理振り分け
+    session_name('sid');
+    switch (true) {
+        case login():
+        case exist_sid():
+            if (session_on()) break;
+        default:
+            html_top();
+            exit;
+    }
+    
     $mode = $tmp['mode'];
     $func = $GLOBALS['FFADV_COMMAND_MAP'][ $mode ];
 

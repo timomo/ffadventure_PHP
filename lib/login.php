@@ -485,3 +485,84 @@ function log_in( $in ) {
 	
 	$chara_flag = 0;
 }
+
+/**
+ * セッションＩＤを発行または更新
+ *
+ * @link http://doremi.s206.xrea.com/php/tips/session.html
+ * @return bool
+ */
+function session_on() {
+	$sid = req( session_name() );
+	ini_set( 'session.use_trans_sid', '0' );
+
+	session_start();	// セッション開始
+	if ( empty( $sid ) ) {	// login時なら
+		$_SESSION['id'] = $GLOBALS['id'] = req('id');
+	} else {	// セッション継続
+		if (req('logout')) session_off();	// ログアウト処理
+		if (empty($_SESSION['id'])) return false;
+		$GLOBALS['id'] = $_SESSION['id'];
+
+		// セッションＩＤを更新
+		$tmp = $_SESSION; $_SESSION = array();
+		session_destroy();
+		session_id(md5(uniqid(rand(), 1)));
+		session_start();
+		$_SESSION = $tmp;
+	}
+
+	return true;
+}
+
+/**
+ * ログアウト処理
+ *
+ * @link http://doremi.s206.xrea.com/php/tips/session.html
+ */
+function session_off() {
+	setcookie(session_name(), "", time()-42000);	// クッキーを消す
+	$_SESSION = array();	// セッション変数を消す
+	session_destroy();	// セッションファイルを消す
+	header("Location: " . read_config_option("script"));
+	exit;
+}
+
+/**
+ * リクエストデータ取得
+ *
+ * @link http://doremi.s206.xrea.com/php/tips/session.html
+ */
+function req($key) {
+	return(isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');
+}
+
+/**
+ * 正当なセッションＩＤが送られてきたか判断
+ *
+ * @link http://doremi.s206.xrea.com/php/tips/session.html
+ * @return bool
+ */
+function exist_sid() {
+	$sid = req(session_name());
+	return(!empty($sid) && file_exists(session_save_path()
+		. DIRECTORY_SEPARATOR . 'sess_' . $sid) ? true : false);
+}
+
+/**
+ * 認証を行う
+ *
+ * @link http://doremi.s206.xrea.com/php/tips/session.html
+ * @return bool
+ */
+function login() {
+	$login = req('login');
+	if (!empty($login)) {
+		$_REQUEST[session_name()] = '';
+		$id = req('id'); $pass = req('pass');
+		$chara = load_chara_data( $id );
+		if (!empty($id) && $id === $chara["id"]
+			&& !empty($pass) && md5($pass) === $chara["pass"]) return true;
+	}
+	return false;
+}

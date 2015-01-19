@@ -453,7 +453,7 @@ function save_winner_data( $data ) {
 function save_record_data( $data ) {
     $tmp = load_record_data();
     if ( $data["count"] > $tmp["count"] ) {
-        save_record_data( $data );
+        // save_record_data( $data );
     }
 }
 
