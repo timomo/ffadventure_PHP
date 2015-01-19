@@ -7,7 +7,7 @@
  */
 
 function battle_monster( $in ) {
-    $chara = login_chara_data( $in );
+    $chara = load_chara_data( $_SESSION["id"] );
     $max_turn = read_config_option( "turn" );
     $chara_syoku = read_config_option( "chara_syoku" );
     $lv_up = read_config_option( "lv_up" );

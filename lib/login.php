@@ -196,10 +196,11 @@ function log_in( $in ) {
 	$message_file = read_config_option( 'message_file' );
 	$charas = load_all_chara_data();
 	$winner = load_winner_data();
-	$citem = load_item_data( $chara["item"] );
 
     // TODO: ファイルロック
 	$chara = load_chara_data( $_SESSION["id"] );
+	$citem = load_item_data( $chara["item"] );
+	
 	$ltime = time();
 	$ltime = $ltime - $chara["date"];
 	$vtime = $b_time - $ltime;
@@ -234,6 +235,8 @@ function log_in( $in ) {
 
 	?>
 	<h1><?php echo $chara["name"] ?>さん用ステータス画面</h1>
+	&nbsp;
+	<a href="<?php echo $script ?>?logout=1"></a>
 	<hr size="0" />
 	<?php
 	if ( $ltime < $b_time or !$chara["total"] ) {

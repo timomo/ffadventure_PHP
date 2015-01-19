@@ -7,7 +7,7 @@
  */
 
 function weapon_shop( $in ) {
-    $chara = login_chara_data( $in );
+    $chara = load_chara_data( $_SESSION["id"] );
     $items = load_all_item_data();
     $script = read_config_option( "script" );
     

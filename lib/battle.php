@@ -7,7 +7,7 @@
  */
 
 function battle_duel( $in ) {
-    $chara = login_chara_data( $in );
+    $chara = load_chara_data( $_SESSION["id"] );
     $max_turn = read_config_option( "turn" );
     $level_sa = read_config_option( "level_sa" );
     $chara_syoku = read_config_option( "chara_syoku" );

@@ -7,7 +7,7 @@
  */
 
 function yado( $in ) {
-    $chara = login_chara_data( $in );
+    $chara = load_chara_data( $_SESSION["id"] );
     $yado_gold = calc_yado_daikin( $chara );
     $script = read_config_option( "script" );
     $winner = load_winner_data();
