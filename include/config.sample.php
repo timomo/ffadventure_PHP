@@ -10,7 +10,7 @@
  * 初期設定用ファイル config.php
  * programed by timomo
  *
- * http://timothy305.hatenablog.com/
+ * http://www.thanks.click/
  * tyomo88@gmail.com
  */
 
