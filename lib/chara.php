@@ -347,6 +347,7 @@ function chara_regist_new( $in ) {
     }
     $data = $in;
     $data['name'] = $data['c_name'];
+    $data["pass"] = md5( $data["pass"] );
     unset( $data['c_name'] );
     $data['lp'] = rand( 0, 15 );
     $data['hp'] = ( $in['n_3'] + $kiso_nouryoku[3] ) + rand( 0, $data['lp'] ) + $kiso_hp;
