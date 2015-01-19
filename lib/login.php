@@ -500,13 +500,15 @@ function session_on() {
 	session_start();	// セッション開始
 	if ( empty( $sid ) ) {	// login時なら
 		$_SESSION['id'] = req('id');
+		var_dump( $_SESSION );
 		var_dump( $_REQUEST );
 	} else {	// セッション継続
 		if (req('logout')) session_off();	// ログアウト処理
 		if (empty($_SESSION['id'])) return false;
 
 		// セッションＩＤを更新
-		$tmp = $_SESSION; $_SESSION = array();
+		$tmp = $_SESSION;
+		$_SESSION = array();
 		session_destroy();
 		session_id(md5(uniqid(rand(), 1)));
 		session_start();
