@@ -207,6 +207,8 @@ function log_in( $in ) {
 	$esex = get_sex_name( $chara );
 	$next_ex = get_next_ex( $chara );
 	$class_name = get_class_name( $chara );
+
+	$yado_gold = calc_yado_daikin( $chara );
 	
 	show_header();
 
@@ -335,23 +337,14 @@ function log_in( $in ) {
 	<br>
 	　<small>※ 転職すると、全ての能力値が転職した職業の初期値になります。また、LVも1になります。</small>
 	</form>
+	
 	<form action="<?php echo $script ?>" method="post">
 	【魔物と戦い修行できます】<br />
-	<input type="hidden" name="mode" value="monster" />
-	<?php
-	if( $ltime >= $m_time or !$chara["total"] ) {
-		?>
+		<input type="hidden" name="mode" value="monster" />
 		<input type="submit" value="モンスターと闘う"><br />
-		<?php
-	}else{
-		?>
-		<?php echo $mtime ?>秒後闘えるようになります。<br />
-		<?php
-	}
-	$yado_gold = calc_yado_daikin( $chara );
-	?>
 	　<small>※修行の旅にいけます。</small>
 	</form>
+	
 	<form action="<?php echo $script ?>" method="post">
 	【旅の宿】<br>
 	<input type="hidden" name="mode" value="yado" />

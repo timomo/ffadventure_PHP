@@ -118,7 +118,8 @@ function set_command_map() {
         'message' => 'message',
         'weapon_shop' => 'weapon_shop',
         'weapon_buy' => 'weapon_buy',
-        "chara_edit" => "chara_edit"
+        "chara_edit" => "chara_edit",
+        "career_change" => "career_change"
     );
 }
 

@@ -649,6 +649,18 @@ function get_sex_name( $data ) {
     return '女';
 }
 
+function career_change( $in ) {
+    if ( $in["syoku"] == "no" ) {
+        error_page( "職業を選択してください。" );
+    }
+    $file_syoku = read_config_option( "syoku_file" );
+    $syoku = file( $file_syoku );
+    var_dump( $syoku );
+    
+    $career = "";
+    
+}
+
 function get_class_name( $data ) {
     $class = "";
     $FIGHTER = read_config_option( "FIGHTER" );
