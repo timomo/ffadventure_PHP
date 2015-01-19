@@ -186,7 +186,7 @@ $home_title = "HOMEへ";
  * 
  * @var string
  */
-$homepage = "http://ffadv.special-thanks.me/";
+$homepage = "http://www.ffa.red/";
 
 /**
  * 管理者からのメッセージ
