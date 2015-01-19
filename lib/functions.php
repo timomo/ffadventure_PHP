@@ -78,7 +78,13 @@ function forward( $tmp ) {
         case exist_sid():
             if (session_on()) break;
         default:
-            html_top();
+            if ( $tmp["mode"] == "chara_make" ) {
+                chara_make( $tmp );
+            } elseif ( $tmp["mode"] == "make_end" ) {
+                chara_make_end( $tmp );
+            } else {
+                html_top( $tmp );
+            }
             exit;
     }
     

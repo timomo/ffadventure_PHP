@@ -43,7 +43,8 @@ function chara_make( $in ) {
             </tr>
             <tr>
                 <td class="b1">キャラクターのイメージ</td>
-                <td><select name="chara">
+                <td>
+                    <select name="chara">
                         <?php
                         foreach( $chara_name as $no => $img ) {
                         ?>
@@ -51,7 +52,8 @@ function chara_make( $in ) {
                         <?php
                         }
                         ?>
-                    </select><br><small>△作成するキャラクターの性別を選択してください。</small></td>
+                    </select><br><small>△作成するキャラクターの性別を選択してください。</small>
+                </td>
             </tr>
             <tr>
                 <td class="b1">キャラクターの能力</td>

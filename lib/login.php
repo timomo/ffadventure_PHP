@@ -386,8 +386,7 @@ function log_in( $in ) {
 	</form>
 	
 	<form action="<?php echo $script ?>" method="post">
-	<a href="<?php echo $script ?>?mode=weapon_shop">【武器屋】</a>
-	<br>
+	【武器屋】<br>
 	<input type="hidden" name="mode" value="weapon_shop" />
 	<input type="submit" value="武器屋へ行く" /><br />
 	　<small>※武器を購入する事が出来ます。</small>
