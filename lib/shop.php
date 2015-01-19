@@ -16,7 +16,7 @@ function weapon_shop( $in ) {
     ?>
     <h1>武器屋</h1>
     <hr size="0">
-    <form action="<?php echo $script ?>>" method="post">
+    <form action="<?php echo $script ?>" method="post">
         買いたいアイテムをチェックしてください。
         <table border="1">
             <thead>
@@ -57,11 +57,19 @@ function weapon_shop( $in ) {
         <div>
             <input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
             <input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
-            <input type="hidden" name="mode" value="item_buy" />
+            <input type="hidden" name="mode" value="weapon_buy" />
             <input type="submit" value="アイテムを買う" />
         </div>
     </form>
     <?php
     
     show_footer();
+}
+
+function weapon_buy( $in ) {
+    $chara = load_chara_data( $_SESSION["id"] );
+    $script = read_config_option( "script" );
+    $item = load_item_data( $in["item_no"] );
+
+    var_dump( $item );
 }
