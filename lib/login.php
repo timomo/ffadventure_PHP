@@ -504,7 +504,6 @@ function session_on() {
 		if (req('logout')) session_off();	// ログアウト処理
 		if (empty($_SESSION['id'])) return false;
 
-		var_dump( $_SESSION );
 		// セッションＩＤを更新
 		$tmp = $_SESSION;
 		$_SESSION = array();
