@@ -559,13 +559,10 @@ function exist_sid() {
  */
 function login() {
 	$login = req('login');
-	var_dump( "login" );
 	if (!empty($login)) {
 		$_REQUEST[session_name()] = '';
 		$id = req('id'); $pass = req('pass');
 		$chara = load_chara_data( $id );
-		var_dump( $chara );
-		var_dump( md5( $pass ) );
 		if (!empty($id) && $id === $chara["id"]
 			&& !empty($pass) && md5($pass) === $chara["pass"]) return true;
 	}

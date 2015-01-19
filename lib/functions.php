@@ -76,10 +76,8 @@ function forward( $tmp ) {
     switch (true) {
         case login():
         case exist_sid():
-            var_dump( "here1" );
             if (session_on()) break;
         default:
-            var_dump( "here2" );
             html_top();
             exit;
     }
@@ -101,7 +99,7 @@ function forward( $tmp ) {
  */
 function set_command_map() {
     $GLOBALS['FFADV_COMMAND_MAP'] = array(
-        '' => 'html_top',
+        '' => 'log_in',
         'log_in' => 'log_in',
         'chara_make' => 'chara_make',
         'make_end' => 'chara_make_end',
