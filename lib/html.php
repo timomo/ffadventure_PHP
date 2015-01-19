@@ -16,6 +16,8 @@ function show_footer() {
     // TODO: $kid
     // TODO: $kpass
     
+    echo read_config_option( "footer_message" );
+    
     if( $refresh and !$win and $mode == 'battle' ) {
         ?>
         【<b><a href="<?php echo $wurl ?>">チャンプのホームページへ</a></b>】
@@ -147,4 +149,5 @@ function show_header() {
 	<title><?php echo $main_title ?></title></head>
 	<body background="<?php echo $backgif ?>" bgcolor="<?php echo $bgcolor ?>" text="<?php echo $text ?>" link="<?php echo $link ?>" vlink="<?php echo $vlink ?>" alink="<?php echo $alink ?>">
     <?php
+        echo read_config_option( "header_message" );
 }

@@ -32,6 +32,8 @@ $names_array = array(
     'home_title',
     'homepage',
     'kanri_message',
+    "header_message",
+    "footer_message",
     'chara_stop',
     'b_time',
     'm_time',
