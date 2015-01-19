@@ -407,7 +407,7 @@ function log_in( $in ) {
 	$hit = 0;
 	$j = 0;
 	foreach ( $MESSAGE_LOG as $i => $line ){
-		list( $pid, $hid, $hname, $hmessage, $hhname, $htime) = implode( "<>", "" );
+		list( $pid, $hid, $hname, $hmessage, $hhname, $htime) = explode( "<>", "" );
 		if ( $chara["id"] == $pid ) {
 			if( $max_gyo < $j ) {
 				break;
