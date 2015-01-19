@@ -144,7 +144,7 @@ function chara_make_end( $in ) {
     if ( $g > $_SESSION['point'] ) {
         $error[] = 'ポイントの振り分けが多すぎます。振り分けの合計を、'. $_SESSION['point'] .'以下にしてください。';
     }
-    if ( count( $error ) > 1 ) {
+    if ( count( $error ) > 0 ) {
         error_page( $error );
     }
     
@@ -329,7 +329,26 @@ function chara_make_end( $in ) {
 }
 
 function chara_edit( $in ) {
-    var_dump( $_REQUEST );
+    $error = array();
+    if ( $in['site'] == '' ) {
+        $error[] = 'ホームページ名が未記入です';
+    }
+    if ( $in['url'] == '' ) {
+        $error[] = 'URLが未記入です';
+    }
+    if ( $in["waza"] == "" ) {
+        $error[] = '技発動時コメントが未記入です';
+    }
+    if ( count( $error ) > 0 ) {
+        error_page( $error );
+    }
+    $chara = load_chara_data( $_SESSION["id"] );
+    $chara["site"] = $in["site"];
+    $chara["url"] = $in["url"];
+    $chara["waza"] = $in["waza"];
+    save_chara_data( $chara );
+    
+    print "キャラクター情報を変更しました。";
 }
 
 /**
