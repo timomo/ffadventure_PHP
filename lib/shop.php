@@ -70,6 +70,29 @@ function weapon_buy( $in ) {
     $chara = load_chara_data( $_SESSION["id"] );
     $script = read_config_option( "script" );
     $item = load_item_data( $in["item_no"] );
+    $error = array();
+    
+    if ( $item["id"] == "0000" ) {
+        $error[] = "そのアイテムは購入出来ません。";
+    }
+    if ( $chara["gold"] < $item["gold"] ) {
+        $error[] = "お金が足りません。";
+    }
 
-    var_dump( $item );
+    if ( count( $error ) > 0 ) {
+        error_page( $error );
+    }
+    
+    $chara["item"] = $item["id"];
+    
+    save_chara_data( $chara );
+    
+    ?>
+    <h1>アイテムを買いました</h1>
+    <hr size="0" />
+    <form action="<?php echo $script ?>">
+        <input type="mode" value="" />
+        <input type="submit" value="ステータス画面へ" />
+    </form>
+    <?
 }
