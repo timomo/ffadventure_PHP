@@ -500,12 +500,11 @@ function session_on() {
 	session_start();	// セッション開始
 	if ( empty( $sid ) ) {	// login時なら
 		$_SESSION['id'] = req('id');
-		var_dump( $_SESSION );
-		var_dump( getenv( session_name() ) );
 	} else {	// セッション継続
 		if (req('logout')) session_off();	// ログアウト処理
 		if (empty($_SESSION['id'])) return false;
 
+		var_dump( "here" );
 		// セッションＩＤを更新
 		$tmp = $_SESSION;
 		$_SESSION = array();
@@ -549,7 +548,6 @@ function req($key) {
  */
 function exist_sid() {
 	$sid = req(session_name());
-	var_dump( $sid );
 	return(!empty($sid) && file_exists(session_save_path()
 		. DIRECTORY_SEPARATOR . 'sess_' . $sid) ? true : false);
 }
