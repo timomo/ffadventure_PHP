@@ -78,6 +78,7 @@ function forward( $tmp ) {
         case exist_sid():
             if (session_on()) break;
         default:
+            var_dump( $_SESSION );
             html_top();
             exit;
     }
