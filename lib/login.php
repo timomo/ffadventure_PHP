@@ -537,8 +537,7 @@ function session_off() {
  * @link http://doremi.s206.xrea.com/php/tips/session.html
  */
 function req($key) {
-	$_REQUEST = $_REQUEST + $_COOKIE;
-	var_dump( $_REQUEST );
+	$_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
 	return(isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');
 }
 
