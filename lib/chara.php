@@ -653,14 +653,49 @@ function career_change( $in ) {
     if ( $in["syoku"] == "no" ) {
         error_page( "職業を選択してください。" );
     }
+    
     $file_syoku = read_config_option( "syoku_file" );
-    $syoku = file( $file_syoku );
-    $line = $syoku[ $in["syoku"] ];
+    $career = file( $file_syoku );
+    $line = $career[ $in["syoku"] ];
+    $params = implode( "<>", $line );
+    $script = read_config_option( "script" );
     
-    var_dump( $line );
+    $chara["lv"] = 1;
+    $chara["ex"] = 0;
     
-    $career = "";
+    if ( $params[0] != "" ) {
+        $chara["n_0"] = $params[0];
+    }
+    if ( $params[1] != "" ) {
+        $chara["n_1"] = $params[1];
+    }
+    if ( $params[2] != "" ) {
+        $chara["n_2"] = $params[2];
+    }
+    if ( $params[3] != "" ) {
+        $chara["n_3"] = $params[3];
+    }
+    if ( $params[4] != "" ) {
+        $chara["n_4"] = $params[4];
+    }
+    if ( $params[5] != "" ) {
+        $chara["n_5"] = $params[5];
+    }
+    if ( $params[6] != "" ) {
+        $chara["n_6"] = $params[6];
+    }
+    $chara["syoku"] = $in["syoku"];
     
+    save_chara_data( $chara );
+
+    ?>
+    <h1>転職しました</h1>
+    <hr size="0" />
+    <form action="<?php echo $script ?>">
+        <input type="hidden" name="mode" value="" />
+        <input type="submit" value="ステータス画面へ" />
+    </form>
+    <?php
 }
 
 function get_class_name( $data ) {
