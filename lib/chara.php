@@ -655,7 +655,9 @@ function career_change( $in ) {
     }
     $file_syoku = read_config_option( "syoku_file" );
     $syoku = file( $file_syoku );
-    var_dump( $syoku );
+    $line = $syoku[ $in["syoku"] ];
+    
+    var_dump( $line );
     
     $career = "";
     
