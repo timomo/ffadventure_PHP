@@ -12,7 +12,7 @@ function load_item_data( $id ) {
     }
     if ( array_key_exists( $id, $GLOBALS["ITEMS"] ) == false ) {
         return array(
-            "id" => "0000",
+            "no" => "0000",
             "name" => "素手",
             "dmg" => 1,
             "gold" => 0

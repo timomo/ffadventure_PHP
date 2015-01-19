@@ -72,7 +72,7 @@ function weapon_buy( $in ) {
     $item = load_item_data( $in["item_no"] );
     $error = array();
     
-    if ( $item["id"] == "0000" ) {
+    if ( $item["no"] == "0000" ) {
         $error[] = "そのアイテムは購入出来ません。";
     }
     if ( $chara["gold"] < $item["gold"] ) {
@@ -83,7 +83,7 @@ function weapon_buy( $in ) {
         error_page( $error );
     }
     
-    $chara["item"] = $item["id"];
+    $chara["item"] = $item["no"];
     
     save_chara_data( $chara );
     
