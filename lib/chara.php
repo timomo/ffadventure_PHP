@@ -10,6 +10,7 @@ function chara_make( $in ) {
     $script = read_config_option( 'script' );
     $kiso_nouryoku = read_config_option( 'kiso_nouryoku' );
     $chara_name = read_config_option( 'chara_name' );
+    $_SESSION["point"] = rand( 0, 10 ) + 4;
     show_header();
     ?>
     <h1>キャラクタ作成画面</h1>
@@ -60,17 +61,21 @@ function chara_make( $in ) {
                 <td>
                     <table border=1>
                         <tr>
-                            <td class="b2" width="70">力</td><td class="b2" width="70">知能</td><td class="b2" width="70">信仰心</td><td class="b2" width="70">生命力</td><td class="b2" width="70">器用さ</td><td class="b2" width="70">速さ</td><td class="b2" width="70">魅力</td>
+                            <td class="b2" width="70">力</td>
+                            <td class="b2" width="70">知能</td>
+                            <td class="b2" width="70">信仰心</td>
+                            <td class="b2" width="70">生命力</td>
+                            <td class="b2" width="70">器用さ</td>
+                            <td class="b2" width="70">速さ</td>
+                            <td class="b2" width="70">魅力</td>
                         </tr>
                         <tr>
                             <?php
-                            $point = rand( 0, 10 );
-                            $point += 4;
                             foreach ( range( 0, 6 ) as $i ) {
                                 ?>
                                 <td><?php echo $kiso_nouryoku[$i] ?><select name="n_<?php echo $i ?>">
                                 <?php
-                                foreach( range( 0, $point ) as $j ) {
+                                foreach( range( 0, $_SESSION["point"] ) as $j ) {
                                     ?>
                                     <option value="<?php echo $j ?>"><?php echo $j ?></option>
                                     <?php
@@ -83,14 +88,13 @@ function chara_make( $in ) {
                             ?>
                         </tr>
                     </table>
-                    <small>△ボーナスポイント「<b><?php echo $point ?></b>」をそれぞれに振り分けてください。(振り分けた合計が、<?php echo $point ?>以下になるように。<br>又どれかが最低12以上になるように。最高は18までです)</small>
+                    <small>△ボーナスポイント「<b><?php echo $_SESSION["point"] ?></b>」をそれぞれに振り分けてください。(振り分けた合計が、<?php echo $_SESSION["point"] ?>以下になるように。<br>又どれかが最低12以上になるように。最高は18までです)</small>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" value="これで登録"></td>
             </tr>
         </table>
-        <input type="hidden" name=point value="<?php echo $point ?>">
     </form>
 <?php
     show_footer();
@@ -142,8 +146,8 @@ function chara_make_end( $in ) {
         
         $g = $in['n_0'] + $in['n_1'] + $in['n_2'] + $in['n_3'] + $in['n_4'] + $in['n_5'] + $in['n_6'];
         
-        if ( $g > $in['point'] ) {
-            error_page( 'ポイントの振り分けが多すぎます。振り分けの合計を、'. $in['point'] .'以下にしてください。' );
+        if ( $g > $_SESSION['point'] ) {
+            error_page( 'ポイントの振り分けが多すぎます。振り分けの合計を、'. $_SESSION['point'] .'以下にしてください。' );
         }
 
         show_header();
