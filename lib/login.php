@@ -79,6 +79,7 @@ function html_top() {
 							<input type="password" size="10" name="pass" value="<?php echo $c_pass ?>" />
 						</td>
 						<td>
+							<input type="hidden" name="login" value="1" />
 							<input type="submit" value="ログイン" />
 						</td>
 					</tr>
