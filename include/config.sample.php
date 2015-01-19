@@ -98,7 +98,7 @@ $winner_file= "../data/winner.dat";
  * 
  * @var string
  */
-$message_file = "message.cgi";
+$message_file = "../data/message.dat";
 
 /**
  * 職業データファイル
