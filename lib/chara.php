@@ -108,48 +108,50 @@ function chara_make_end( $in ) {
     $img_path = read_config_option( 'img_path' );
     $chara_img = read_config_option( 'chara_img' );
     $lv_up = read_config_option( 'lv_up' );
+    $error = array();
     
     if ( $chara_stop == 1 ) {
-        error_page( '現在キャラクターの作成登録はできません' );
+        $error[] = '現在キャラクターの作成登録はできません';
     }
     if ( preg_match( '/[^0-9a-zA-Z]/', $in['id'] ) ) {
-        error_page( 'IDに半角英数字以外の文字が含まれています。' );
+        $error[] = 'IDに半角英数字以外の文字が含まれています。';
     }
     if ( preg_match( '/[^0-9a-zA-Z]/', $in['pass'] ) ) {
-        error_page( 'パスワードに半角英数字以外の文字が含まれています。' );
+        $error[] = 'パスワードに半角英数字以外の文字が含まれています。';
     }
+    if ( $in['id'] == '' || strlen( $in['id'] ) < 4 || strlen( $in['id'] ) > 8 ) {
+        $error[] = 'IDは、4文字以上、8文字以下で入力して下さい。';
+    }
+    if ( $in['pass'] == '' || strlen( $in['pass'] ) < 4 || strlen( $in['pass'] ) > 8 ) {
+        $error[] = 'パスワードは、4文字以上、8文字以下で入力して下さい。';
+    }
+    if ( $in['site'] == '' ) {
+        $error[] = 'ホームページ名が未記入です';
+    }
+    if ( $in['url'] == '' ) {
+        $error[] = 'URLが未記入です';
+    }
+    if ( $in['c_name'] == '' ) {
+        $error[] = 'キャラクターの名前が未記入です';
+    }
+    if ( $in['sex'] == '' ) {
+        $error[] = '性別が選択されていません';
+    }
+    if ( check_dup_id( $in['id'] ) == false ) {
+        $error[] = 'そのIDはすでに登録されています';
+    }
+    $g = $in['n_0'] + $in['n_1'] + $in['n_2'] + $in['n_3'] + $in['n_4'] + $in['n_5'] + $in['n_6'];
+    if ( $g > $_SESSION['point'] ) {
+        $error[] = 'ポイントの振り分けが多すぎます。振り分けの合計を、'. $_SESSION['point'] .'以下にしてください。';
+    }
+    if ( count( $error ) > 1 ) {
+        error_page( $error );
+    }
+    
     /**
      * 職業未選択の場合
      */
     if ( array_key_exists( 'syoku', $in ) == false ) {
-        if ( $in['id'] == '' || strlen( $in['id'] ) < 4 || strlen( $in['id'] ) > 8 ) {
-            error_page( 'IDは、4文字以上、8文字以下で入力して下さい。' );
-        }
-        if ( $in['pass'] == '' || strlen( $in['pass'] ) < 4 || strlen( $in['pass'] ) > 8 ) {
-            error_page( 'パスワードは、4文字以上、8文字以下で入力して下さい。' );
-        }
-        if ( $in['site'] == '' ) {
-            error_page( 'ホームページ名が未記入です' );
-        }
-        if ( $in['url'] == '' ) {
-            error_page( 'URLが未記入です' );
-        }
-        if ( $in['c_name'] == '' ) {
-            error_page( 'キャラクターの名前が未記入です' );
-        }
-        if ( $in['sex'] == '' ) {
-            error_page( '性別が選択されていません' );
-        }
-        if ( check_dup_id( $in['id'] ) == false ) {
-            error_page( 'そのIDはすでに登録されています' );
-        }
-        
-        $g = $in['n_0'] + $in['n_1'] + $in['n_2'] + $in['n_3'] + $in['n_4'] + $in['n_5'] + $in['n_6'];
-        
-        if ( $g > $_SESSION['point'] ) {
-            error_page( 'ポイントの振り分けが多すぎます。振り分けの合計を、'. $_SESSION['point'] .'以下にしてください。' );
-        }
-
         show_header();
 
         ?>
