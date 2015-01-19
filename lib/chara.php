@@ -414,7 +414,7 @@ function load_winner_data( $path = "" ) {
 
 function login_chara_data( $in ) {
     $data = load_chara_data( $in["id"] );
-    if ( $data["pass"] != $in["pass"] ) {
+    if ( $data["pass"] != md5( $in["pass"] ) ) {
         error_page( "IDかパスワードが間違っています。" );
     }
     load_stamina( $data );
