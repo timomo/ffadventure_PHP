@@ -500,6 +500,7 @@ function session_on() {
 	
 	var_dump( "here-" );
 	var_dump( $sid );
+	var_dump( $_SESSION );
 	var_dump( "here-" );
 	
 	session_start();	// セッション開始
