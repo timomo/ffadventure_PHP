@@ -114,7 +114,7 @@ function set_command_map() {
         'monster' => 'battle_monster',
         'ranking' => 'ranking',
         'yado' => 'yado',
-        'message' => 'message',
+        'send_message' => 'send_message',
         'weapon_shop' => 'weapon_shop',
         'weapon_buy' => 'weapon_buy',
         "chara_edit" => "chara_edit",

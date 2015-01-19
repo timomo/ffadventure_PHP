@@ -394,8 +394,7 @@ function log_in( $in ) {
 
 	?>
 	</select>
-	<input type="hidden" name="name" value="<?php echo $chara["name"] ?>" />
-	<input type="hidden" name="mode" value="message" />
+	<input type="hidden" name="mode" value="send_message" />
 	<input type="submit" value="メッセージを送る"><br>
 	　<small>※他のキャラクターへメッセージを送ることができます。</small>
 	</form>
