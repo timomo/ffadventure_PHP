@@ -32,7 +32,9 @@ function send_message( $in ) {
         array_pop( $messages );
     }
     
-    file_put_contents( $file_message, implode("¥n", $messages) );
+    var_dump( $messages );
+    
+    file_put_contents( $file_message, implode( "¥n", $messages ) );
 
     ?>
     <h1><?php echo $to["name"] ?>さんへメッセージを送りました。</h1>
