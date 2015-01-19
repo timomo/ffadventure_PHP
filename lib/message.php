@@ -25,6 +25,7 @@ function send_message( $in ) {
     
     $messages = file( $file_message );
     $line = implode( "<>", array( $to["id"], $chara["id"], $chara["name"], $in["mes"], $to["name"], time(), "" ) );
+    $line .= "\n";
     
     array_unshift( $messages, $line );
     
