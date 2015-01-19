@@ -94,5 +94,5 @@ function weapon_buy( $in ) {
         <input type="mode" value="" />
         <input type="submit" value="ステータス画面へ" />
     </form>
-    <?
+    <?php
 }
