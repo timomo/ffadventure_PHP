@@ -207,27 +207,6 @@ function log_in( $in ) {
 	$esex = get_sex_name( $chara );
 	$next_ex = get_next_ex( $chara );
 	$class_name = get_class_name( $chara );
-
-	/**
-
-	&class;
-
-	open(IN,"$item_file");
-	@log_item = <IN>;
-	close(IN);
-
-	$hit=0;
-	foreach(@log_item){
-		($i_no,$i_name,$i_dmg,$i_gold) = split(/<>/);
-		if($kitem eq "$i_no"){ $hit=1;last; }
-	}
-	if(!$hit) { $i_name=""; }
-
-	 * 
-	 */
-	
-	$i_name = "";
-	$class = "";
 	
 	show_header();
 
@@ -237,15 +216,6 @@ function log_in( $in ) {
 	<a href="<?php echo $script ?>?logout=1">ログアウトする</a>
 	</h1>
 	<hr size="0" />
-	<?php
-	if ( $ltime < $b_time or !$chara["total"] ) {
-	?>
-	<form name="form1">
-	チャンプと闘えるまで残り<input type="text" name="clock" size="3" value="<?php echo $vtime ?>" />秒です。0になると、自動的に更新しますのでブラウザの更新は押さないで下さい。
-	</form>
-	<?php
-	}
-	?>
 	<form action="<?php echo $script ?>" method="post" target="_blank">
 	<table border="0">
 	<tr>

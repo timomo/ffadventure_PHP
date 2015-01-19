@@ -465,6 +465,7 @@ function login_chara_data( $in ) {
 }
 
 function save_chara_data( $data ) {
+    $data["date"] = time();
     $text = convert_chara_data_array2scalar( $data );
     $path = get_chara_data_path( $data["id"] );
     file_put_contents( $path, $text );
