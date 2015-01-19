@@ -10,8 +10,6 @@
  * @return void
  */
 function html_top() {
-    $c_id = 'test';
-    $c_pass = 'test';
     $script = read_config_option( 'script' );
     $homepage = read_config_option( 'homepage' );
     $title_img = read_config_option( 'title_img' );
@@ -70,13 +68,13 @@ function html_top() {
 							I D
 						</td>
 						<td>
-							<input type="text" size="10" name="id" value="<?php echo $c_id ?>" />
+							<input type="text" size="10" name="id" value="" />
 						</td>
 						<td class="b1">
 							パスワード
 						</td>
 						<td>
-							<input type="password" size="10" name="pass" value="<?php echo $c_pass ?>" />
+							<input type="password" size="10" name="pass" value="" />
 						</td>
 						<td>
 							<input type="hidden" name="login" value="1" />
@@ -348,8 +346,6 @@ function log_in( $in ) {
 	}
 	?>
 	</select>
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="tensyoku" />
 	<?php
 	if ( $hit == 0 ) {
@@ -367,8 +363,6 @@ function log_in( $in ) {
 	</form>
 	<form action="<?php echo $script ?>" method="post">
 	【魔物と戦い修行できます】<br />
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="monster" />
 	<?php
 	if( $ltime >= $m_time or !$chara["total"] ) {
@@ -386,8 +380,6 @@ function log_in( $in ) {
 	</form>
 	<form action="<?php echo $script ?>" method="post">
 	【旅の宿】<br>
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="yado" />
 	<input type="submit" value="体力を回復" /><br />
 	　<small>※体力を回復することができます。<b><?php echo $yado_gold ?></b>G必要です。現在チャンプの方も回復できます。こまめに回復すれば連勝記録も・・・。</small>
@@ -395,8 +387,6 @@ function log_in( $in ) {
 	
 	<form action="<?php echo $script ?>" method="post">
 	【武器屋】<br>
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="weapon_shop" />
 	<input type="submit" value="武器屋へ行く" /><br />
 	　<small>※武器を購入する事が出来ます。</small>
@@ -404,8 +394,6 @@ function log_in( $in ) {
 	
 	<form action="<?php echo $script ?>" method="post">
 	【チャンプに挑戦】<br />
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="battle" />
 	<?php
 	if ( $winner["id"] != $chara["id"] ) {
@@ -439,9 +427,7 @@ function log_in( $in ) {
 
 	?>
 	</select>
-	<input type="hidden" name="id" value="<?php echo $chara["id"] ?>" />
 	<input type="hidden" name="name" value="<?php echo $chara["name"] ?>" />
-	<input type="hidden" name="pass" value="<?php echo $chara["pass"] ?>" />
 	<input type="hidden" name="mode" value="message" />
 	<input type="submit" value="メッセージを送る"><br>
 	　<small>※他のキャラクターへメッセージを送ることができます。</small>
