@@ -76,8 +76,10 @@ function forward( $tmp ) {
     switch (true) {
         case login():
         case exist_sid():
+            var_dump( "here1" );
             if (session_on()) break;
         default:
+            var_dump( "here2" );
             html_top();
             exit;
     }
