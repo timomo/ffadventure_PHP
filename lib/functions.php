@@ -111,7 +111,6 @@ function set_command_map() {
         'make_end' => 'chara_make_end',
         'regist' => 'regist',
         'battle' => 'battle_duel',
-        'tensyoku' => 'tensyoku',
         'monster' => 'battle_monster',
         'ranking' => 'ranking',
         'yado' => 'yado',

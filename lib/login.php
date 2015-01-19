@@ -322,7 +322,7 @@ function log_in( $in ) {
 	}
 	?>
 	</select>
-	<input type="hidden" name="mode" value="tensyoku" />
+	<input type="hidden" name="mode" value="career_change" />
 	<?php
 	if ( $hit == 0 ) {
 		?>
