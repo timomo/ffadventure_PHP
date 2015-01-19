@@ -495,8 +495,6 @@ function log_in( $in ) {
 function session_on() {
 	$sid = req( session_name() );
 	ini_set( 'session.use_trans_sid', '0' );
-
-	var_dump( $sid );
 	
 	session_start();	// セッション開始
 	if ( empty( $sid ) ) {	// login時なら
@@ -563,6 +561,8 @@ function login() {
 		$_REQUEST[session_name()] = '';
 		$id = req('id'); $pass = req('pass');
 		$chara = load_chara_data( $id );
+		var_dump( $chara );
+		var_dump( md5( $pass ) );
 		if (!empty($id) && $id === $chara["id"]
 			&& !empty($pass) && md5($pass) === $chara["pass"]) return true;
 	}
