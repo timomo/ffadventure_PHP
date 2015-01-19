@@ -252,6 +252,7 @@ function chara_make_end( $in ) {
         show_footer();
     } else {
         $data = chara_regist_new( $in );
+        unset( $_SESSION["point"] );
         
         if ( $data['sex'] == 1 ) {
             $esex = '男';
@@ -320,10 +321,7 @@ function chara_make_end( $in ) {
             </tr>
         </table>
         <form action="<?php echo $script ?>" method="post">
-            <input type="hidden" name="mode" value="log_in" />
-            <input type="hidden" name="id" value="<?php echo $data['id'] ?>" />
-            <input type="hidden" name="pass" value="<?php echo $data['pass'] ?>" />
-            <input type="submit" value="ステータス画面へ">
+            <input type="submit" value="TOP画面へ">
         </form>
         <?php
         show_footer();
