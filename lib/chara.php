@@ -397,6 +397,14 @@ function load_chara_data( $id ) {
     }
     $text = file_get_contents( $chara_data );
     $data = convert_chara_data_scalar2array( $text );
+    if ( $_SESSION ) {
+        load_stamina( $data );
+        use_stamina( $data, 0 );
+        save_stamina( $data );
+        load_battlepoint( $data );
+        use_battlepoint( $data, 0 );
+        save_battlepoint( $data );
+    }
     return $data;
 }
 
