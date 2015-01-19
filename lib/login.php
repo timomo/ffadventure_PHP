@@ -199,7 +199,7 @@ function log_in( $in ) {
 	$citem = load_item_data( $chara["item"] );
 
     // TODO: ファイルロック
-	$chara = login_chara_data( $in );
+	$chara = load_chara_data( $_SESSION["id"] );
 	$ltime = time();
 	$ltime = $ltime - $chara["date"];
 	$vtime = $b_time - $ltime;
