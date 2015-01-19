@@ -495,16 +495,12 @@ function log_in( $in ) {
  */
 function session_on() {
 	$sid = req( session_name() );
-	// ini_set( 'session.use_trans_sid', '0' );
-	
-	var_dump( "here-" );
-	var_dump( $sid );
-	var_dump( $_SESSION );
-	var_dump( "here-" );
+	ini_set( 'session.use_trans_sid', '0' );
 	
 	session_start();	// セッション開始
 	if ( empty( $sid ) ) {	// login時なら
 		$_SESSION['id'] = $GLOBALS['id'] = req('id');
+		var_dump( $_REQUEST );
 	} else {	// セッション継続
 		if (req('logout')) session_off();	// ログアウト処理
 		if (empty($_SESSION['id'])) return false;
