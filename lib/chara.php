@@ -328,6 +328,10 @@ function chara_make_end( $in ) {
     }
 }
 
+function chara_edit( $in ) {
+    var_dump( $_REQUEST );
+}
+
 /**
  * @param array $in
  * @return mixed

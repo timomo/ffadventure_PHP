@@ -117,7 +117,8 @@ function set_command_map() {
         'yado' => 'yado',
         'message' => 'message',
         'weapon_shop' => 'weapon_shop',
-        'item_buy' => 'item_buy'
+        'item_buy' => 'item_buy',
+        "chara_edit" => "chara_edit"
     );
 }
 

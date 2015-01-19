@@ -246,7 +246,7 @@ function log_in( $in ) {
 	<?php
 	}
 	?>
-	<form action="<?php echo $script ?>" method="post">
+	<form action="<?php echo $script ?>" method="post" target="_blank">
 	<table border="0">
 	<tr>
 	<td valign="top" width="50%">
@@ -322,7 +322,11 @@ function log_in( $in ) {
 	</tr>
 	<tr>
 	<td class="b1">技発動時コメント</td>
-	<td colspan="4"><input type="text" name="waza" value="<?php echo $chara["waza"] ?>" size="50" /></td>
+	<td colspan="4">
+		<input type="text" name="waza" value="<?php echo $chara["waza"] ?>" size="50" />
+		<input type="submit" value="変更" />
+		<input type="hidden" name="mode" value="chara_edit" />
+	</td>
 	</tr>
 	</table>
 	</form>
