@@ -499,7 +499,7 @@ function session_on() {
 	
 	var_dump( "here-" );
 	var_dump( $sid );
-	var_dump( $_REQUEST );
+	var_dump( $_COOKIE );
 	var_dump( "here-" );
 	
 	session_start();	// セッション開始
