@@ -659,6 +659,7 @@ function career_change( $in ) {
     $line = $career[ $in["syoku"] ];
     $params = implode( "<>", $line );
     $script = read_config_option( "script" );
+    $chara = load_chara_data( $_SESSION["id"] );
     
     $chara["lv"] = 1;
     $chara["ex"] = 0;
@@ -691,7 +692,7 @@ function career_change( $in ) {
     ?>
     <h1>転職しました</h1>
     <hr size="0" />
-    <form action="<?php echo $script ?>">
+    <form action="<?php echo $script ?>" method="post">
         <input type="hidden" name="mode" value="" />
         <input type="submit" value="ステータス画面へ" />
     </form>
