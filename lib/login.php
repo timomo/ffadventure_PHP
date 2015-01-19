@@ -546,7 +546,7 @@ function req($key) {
  */
 function exist_sid() {
 	$sid = req(session_name());
-	var_dump( "exist_sid" );
+	var_dump( $sid );
 	return(!empty($sid) && file_exists(session_save_path()
 		. DIRECTORY_SEPARATOR . 'sess_' . $sid) ? true : false);
 }
