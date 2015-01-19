@@ -12,6 +12,10 @@ function yado( $in ) {
     $script = read_config_option( "script" );
     $winner = load_winner_data();
     
+    if ( $chara["hp"] == $chara["maxhp"] ) {
+        error_page( "HPは最大値まで回復しています" );
+    }
+    
     if ( $chara["gold"] < $yado_gold ) {
         error_page( "お金が足りません" );
     }
