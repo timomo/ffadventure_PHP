@@ -234,9 +234,10 @@ function log_in( $in ) {
 	show_header();
 
 	?>
-	<h1><?php echo $chara["name"] ?>さん用ステータス画面</h1>
+	<h1><?php echo $chara["name"] ?>さん用ステータス画面
 	&nbsp;
-	<a href="<?php echo $script ?>?logout=1"></a>
+	<a href="<?php echo $script ?>?logout=1">ログアウトする</a>
+	</h1>
 	<hr size="0" />
 	<?php
 	if ( $ltime < $b_time or !$chara["total"] ) {
