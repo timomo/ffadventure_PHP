@@ -494,12 +494,12 @@ function log_in( $in ) {
  * @return bool
  */
 function session_on() {
-	$sid = req( session_name() );
+	// $sid = req( session_name() );
+	$sid = $_COOKIE[ session_name() ];
 	ini_set( 'session.use_trans_sid', '0' );
 	
 	var_dump( "here-" );
 	var_dump( $sid );
-	var_dump( $_COOKIE );
 	var_dump( "here-" );
 	
 	session_start();	// セッション開始
