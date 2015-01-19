@@ -84,6 +84,7 @@ function weapon_buy( $in ) {
     }
     
     $chara["item"] = $item["no"];
+    $chara["gold"] -= $item["gold"];
     
     save_chara_data( $chara );
     
