@@ -501,7 +501,7 @@ function session_on() {
 	if ( empty( $sid ) ) {	// login時なら
 		$_SESSION['id'] = req('id');
 		var_dump( $_SESSION );
-		var_dump( $_REQUEST );
+		var_dump( getenv( session_name() ) );
 	} else {	// セッション継続
 		if (req('logout')) session_off();	// ログアウト処理
 		if (empty($_SESSION['id'])) return false;
