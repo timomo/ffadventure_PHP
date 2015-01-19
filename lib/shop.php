@@ -91,7 +91,7 @@ function weapon_buy( $in ) {
     <h1>アイテムを買いました</h1>
     <hr size="0" />
     <form action="<?php echo $script ?>">
-        <input type="mode" value="" />
+        <input type="hidden" name="mode" value="" />
         <input type="submit" value="ステータス画面へ" />
     </form>
     <?php
