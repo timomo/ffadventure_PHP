@@ -81,7 +81,9 @@ function forward( $tmp ) {
             if ( $tmp["mode"] == "chara_make" ) {
                 chara_make( $tmp );
             } elseif ( $tmp["mode"] == "make_end" ) {
-                chara_make_end( $tmp );
+                chara_make_end($tmp);
+            } elseif ( $tmp["mode"] == "ranking" ) {
+                ranking( $tmp );
             } else {
                 html_top( $tmp );
             }
