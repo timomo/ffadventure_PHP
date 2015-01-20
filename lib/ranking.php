@@ -6,7 +6,7 @@
  * Time: 11:41
  */
 function ranking( $in ) {
-    $charas = load_all_item_data();
+    $charas = load_all_chara_data();
     $num_chara = count( $charas );
     $rank_top = read_config_option( "rank_top" );
     
