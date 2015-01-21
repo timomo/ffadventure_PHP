@@ -493,7 +493,7 @@ function session_off() {
  * @return mixed
  */
 function req( $key ) {
-	// $_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
+	$_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
 	var_dump( $_REQUEST );
 	return(isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');
 }
