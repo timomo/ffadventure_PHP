@@ -489,9 +489,12 @@ function session_off() {
  * リクエストデータ取得
  *
  * @link http://doremi.s206.xrea.com/php/tips/session.html
+ * @param string $key
+ * @return mixed
  */
-function req($key) {
-	$_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
+function req( $key ) {
+	// $_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
+	var_dump( $_REQUEST );
 	return(isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');
 }
 
