@@ -78,16 +78,20 @@ function forward( $tmp ) {
         case exist_sid():
             if (session_on()) break;
         default:
-            if ( $tmp["mode"] == "chara_make" ) {
-                chara_make( $tmp );
-            } elseif ( $tmp["mode"] == "make_end" ) {
-                chara_make_end($tmp);
-            } elseif ( $tmp["mode"] == "ranking" ) {
-                ranking( $tmp );
-            } else {
-                html_top( $tmp );
+            switch ( $tmp["mode"] ) {
+                case "chara_make":
+                    chara_make( $tmp );
+                    break;
+                case "make_end":
+                    chara_make_end( $tmp );
+                    break;
+                case "ranking":
+                    ranking( $tmp );
+                    break;
+                default:
+                    html_top();
+                    exit;
             }
-            exit;
     }
     
     $mode = $tmp['mode'];
