@@ -56,7 +56,9 @@ function ranking( $in ) {
         <?php
         $i++;
     }
-    
+    ?>
+    </table>
+    <?php
     show_footer();
 }
 
