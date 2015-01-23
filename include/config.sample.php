@@ -19,7 +19,7 @@
  *
  * @ver string
  */
-$ver = 'FF ADVENTURE PHP v0.01';
+$ver = 'FF ADVENTURE PHP v0.40';
 
 /**
  * --- [注意事項] ------------------------------------------------
