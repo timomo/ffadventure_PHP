@@ -13,7 +13,7 @@ function ranking( $in ) {
     $limit = read_config_option( "limit" );
     $ima = time();
     
-    $ranking = usort( $ranking, "ranking_compare" );
+    $ranking = usort( $charas, "ranking_compare" );
     
     show_header();
     ?>
