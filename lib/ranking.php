@@ -17,7 +17,8 @@ function ranking( $in ) {
     
     show_header();
     ?>
-    <h1>英雄たちの記録</h1><hr size=0>
+    <h1>英雄たちの記録</h1>
+    <hr size="0" />
     現在登録されているキャラクター<b><?php echo $num_chara ?></b>人中レベルTOP<b><?php echo $rank_top ?></b>を表示しています。
     <p>
     <table border="1">

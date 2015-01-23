@@ -81,12 +81,15 @@ function forward( $tmp ) {
             switch ( $tmp["mode"] ) {
                 case "chara_make":
                     chara_make( $tmp );
+                    exit;
                     break;
                 case "make_end":
                     chara_make_end( $tmp );
+                    exit;
                     break;
                 case "ranking":
                     ranking( $tmp );
+                    exit;
                     break;
                 default:
                     html_top();
