@@ -14,6 +14,7 @@ function ranking( $in ) {
     $ima = time();
     
     $ranking = usort( $charas, "ranking_compare" );
+    $ranking = $charas;
     
     show_header();
     ?>
@@ -44,7 +45,7 @@ function ranking( $in ) {
         $niti = (int)( $niti / ( 60 * 60 * 24 ) );
         ?>
         <tr>
-            <td align="center"><?php echo $i ?></td>
+            <td align="center"><?php echo $i + 1 ?></td>
             <td><?php echo $data["name"] ?></td>
             <td><?php echo $chara_syoku[ $data["syoku"] ] ?></td>
             <td><a href="<?php echo $data["url"] ?>" target="_blank"><?php echo $data["site"] ?></a></td>
